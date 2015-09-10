@@ -1,0 +1,31 @@
+<article class="contact">
+    <form action="/contact" method="post">
+        {{#if error}}
+            <strong>{{error}}</strong>
+        {{/if}}
+
+        <div>
+            <h3>Name</h3>
+            <input type="text" name="firstName" placeholder="First Name" id="firstName" autofocus/>
+            <input type="text" name="lastName" placeholder="Last Name" id="lastName"/>
+        </div>
+        <div>
+            <h3>Email</h3>
+            <input type="email" name="email" placeholder="Contact Email" id="email"/>
+            <input type="email" name="confirmEmail" placeholder="Confirm Contact Email" id="confirmEmail"/>
+        </div>
+        <div>
+            <h3>Phone</h3>
+            <input type="tel" name="dayPhone" placeholder="Day Phone Number" id="dayPhone"/>
+            <input type="tel" name="eveningPhone" placeholder="Evening Phone Number" id="phone"/>
+        </div>
+        <div>
+            <h3>Message</h3>
+            <textarea name="message"></textarea>
+        </div>
+        <div>
+            <input class="btn" type="submit" value="Send"/>
+        </div>
+
+    </form>
+</article>

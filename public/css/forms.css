@@ -1,0 +1,31 @@
+article.contact {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.contact form {
+	padding: 1em;
+	background: rgb(230, 240, 245);
+}
+
+form div {
+	margin-top: .5em;
+}
+
+form textarea {
+	width: 92%;
+	height: 10em;
+}
+/*
+form #firstName,
+form #lastName,
+form #email,
+form #confirmEmail {
+	width: 48.5%;
+}*/
+
+article form input[type=text] {
+	/*width: 98.7%;*/
+	margin: .2em 0;
+}

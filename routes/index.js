@@ -33,7 +33,7 @@ router.get('/projects', function(req, res, next) {
 });
 
 router.get('/contact', function(req, res, next) {
-    res.render('index', {
+    res.render('contactform', {
         pageName: 'contact',
         pageIcon: 'envelope'
     });
