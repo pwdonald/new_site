@@ -1,0 +1,811 @@
+/*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* ===== Initializr Styles ==================================================
+   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
+   ========================================================================== */
+
+body {
+    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+/* ===================
+    ALL: Orange Theme
+   =================== */
+
+.header-container {
+    border-bottom: 20px solid #e44d26;
+}
+
+.footer-container,
+.main aside {
+    border-top: 20px solid #e44d26;
+}
+
+.header-container,
+.footer-container,
+.main aside {
+    background: #f16529;
+}
+
+.title {
+    color: white;
+}
+
+/* ==============
+    MOBILE: Menu
+   ============== */
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 0;
+
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    color: white;
+    background: #e44d26;
+}
+
+nav a:hover,
+nav a:visited {
+    color: white;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ==============
+    MOBILE: Main
+   ============== */
+
+.main {
+    padding: 30px 0;
+}
+
+.main article h1 {
+    font-size: 2em;
+}
+
+.main aside {
+    color: white;
+    padding: 0px 5% 10px;
+}
+
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+/* ===============
+    ALL: IE Fixes
+   =============== */
+
+.ie7 .title {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*Theme*/
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-container {
+    border-top: 2px solid rgb(30,90,195);
+    border-bottom: 20px solid rgb(40,133,217);
+}
+
+.header-container a {
+    text-decoration: none;
+}
+
+footer:hover {
+    cursor: default;
+}
+
+.subhead {
+    background: rgb(230, 240, 245);
+    margin: 0;
+    padding: 1em;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.subhead:hover {
+    cursor: default;
+}
+
+.footer-container,
+.main aside {
+    border-top: 20px solid rgb(40,133,217);
+}
+
+.footer-container {
+    border-top: 10px solid rgb(50, 143, 227);
+    border-bottom: 20px solid rgb(30,90,195);
+    background: rgb(40,133,217);
+    text-align: center;
+}
+
+.footer-container footer p a i {
+    color: white;
+    font-size: 2em;
+    margin-right: .5em;
+    -webkit-transition: color .5s ease-out;
+    -moz-transition: color .5s ease-out;
+    -o-transition: color .5s ease-out;
+    transition: color .5s ease-out;
+}
+
+.footer-container footer p a i:hover {
+    color: #aaa;
+}
+
+footer h3 {
+    font-weight: normal;
+}
+
+.header-container,
+.main aside {
+    background: white;
+    color: black;
+}
+
+.title {
+    color: black;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.interesting {
+    text-align: center;
+    margin: 1em 0;
+}
+
+.btn {
+    border-radius: 5%;
+    padding: .5em 1em;
+    border: 1px solid #aaa;
+    background: transparent;
+    color: #aaa;
+    text-decoration: none;
+
+    -webkit-transition: background-color .5s ease-out;
+    -moz-transition: background-color .5s ease-out;
+    -o-transition: background-color .5s ease-out;
+    transition: background-color .5s ease-out;
+}
+
+.btn-small {
+    padding: .25em .5em;
+    font-size: .75em;
+}
+
+.right {
+    float: right;
+}
+
+.btn:hover {
+    color: white;
+    background: rgb(40,133,217);
+}
+
+.btn.active {
+    color: white;
+    background: rgb(40,133,217);
+}
+
+.btn-success {
+    border: 1px solid rgb(0, 255, 0);
+    color: rgb(0, 255, 0);
+}
+
+.btn-success:hover {
+    color: black;
+    background-color: rgb(0, 242, 0);
+}
+
+.btn-success.active {
+    color: black;
+    background-color: rgb(0, 242, 0);
+}
+
+.btn-failure {
+    border: 1px solid red;
+    color: red;
+}
+
+.btn-failure:hover {
+    background-color: red;
+}
+
+.btn-failure.active {
+    background-color: red;
+}
+
+.interesting .btn {
+    padding: .25em .5em;
+}
+
+nav li.active a {
+    background: rgb(40,133,217);
+    color: white;
+}
+
+nav li a {
+    border-radius: 5%;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em .25em;
+    font-weight: lighter;
+
+    text-align: center;
+    text-decoration: none;
+
+    background: transparent;
+    color: black;
+    border: 1px solid rgb(40,133,217);
+    -webkit-transition: background-color .5s ease-out;
+    -moz-transition: background-color .5s ease-out;
+    -o-transition: background-color .5s ease-out;
+    transition: background-color .5s ease-out;
+}
+
+nav a:visited {
+    color: black;
+}
+
+nav a:hover {
+    background: rgb(40,133,217);
+    color: white;
+    text-decoration: none
+}
+
+.main aside {
+    border-top: 0;
+}
+
+.main aside form {
+    margin-top: 10px;
+}
+
+article {
+    padding: 0;
+}
+
+article h1, article h2, article h3 {
+    font-weight: lighter;
+}
+
+article h2, article h3 {
+    color: #aaa;
+    margin: 5px 0;
+    padding: 0;
+}
+
+article h1 small {
+    display: block;
+    color: #aaa;
+    font-size: 50%;
+}
+
+article p {
+    padding: 0;
+    margin: 5px 2px;
+}
+
+.article-footer {
+    margin-top: 2%;
+    border-top: 1px dotted #aaa;
+}
+
+.main article .previous a,
+.main article .next a {
+    text-decoration: none;
+    color: #aaa;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.main article .previous a:hover,
+.main article .next a:hover {
+    color: black;
+    padding-bottom: 2px;
+    border-bottom: 1px solid black;
+}
+
+.main article .previous,
+.main article .next {
+    margin-top: 1%;
+    width: 50%;
+}
+
+.main article .previous {
+    float: left;
+    text-align: left;
+}
+
+.main article .next {
+    float: right;
+    text-align: right;
+}
+
+.author {
+    font-size: 0.65em;
+    color: #aaa;
+    margin: 0;
+    padding: 0;
+}
+
+.author a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.header-container {
+    -webkit-box-shadow: 0 2px 6px #aaa !important;
+       -moz-box-shadow: 0 2px 6px #aaa !important;
+            box-shadow: 0 2px 6px #aaa !important;
+}
+
+.main aside {
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none !important;
+}
+
+.title-img {
+    text-align: center;
+}
+
+.title-img img {
+    width: 10em;
+}
+
+.main aside h3 {
+    color: #aaa;
+    font-weight: lighter;
+}
+
+.main aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main aside ul li a {
+    text-decoration: none;
+    font-weight: lighter;
+    color: black;
+    padding-bottom: 2px;
+    border-bottom: 1px solid white;
+}
+
+.main aside ul li a:visited {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.main aside ul li a:hover {
+    color: blue;
+    padding-bottom: 2px;
+    border-bottom: 1px solid blue;
+}
+
+.main aside ul li small {
+    font-size: 75%;
+    color: #aaa;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.main aside i {
+    color: #aaa;
+    font-size: 2em;
+    visibility: hidden;
+    -webkit-transition: color .5s ease-out;
+    -moz-transition: color .5s ease-out;
+    -o-transition: color .5s ease-out;
+    transition: color .5s ease-out;
+}
+
+.main aside i:hover {
+    color: black;
+}
+
+.icon {
+    padding: 0;
+    margin: -.75em 0;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.icon i {
+    width: 1em;
+    margin: 0 auto;
+    padding: .3em;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.author-info {
+    padding: .5em;
+    background: rgb(230, 240, 245);
+}
+
+.author-info span {
+    vertical-align: middle;
+    font-size: 1.1em;
+}
+
+.author-info a {
+    vertical-align: middle;
+    border-radius: 0;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.author-info a:hover {
+    color: #aaa;
+}
+
+.author-pic {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: 120%;
+    background-position: center -5px;
+    background-image: url('https://avatars1.githubusercontent.com/u/285609?v=3&s=460');
+}
+
+@media only screen and (min-width: 480px) {
+    .title {
+        text-align: center;
+    }
+
+    .title-img {
+        text-align: center;
+    }
+
+    .title-img img {
+        width: 5em;
+    }
+
+    nav li a {
+        display: block;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        padding: .35em .15em;
+    }
+
+    article {
+        border: 1px solid #aaa;
+        padding: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .title {
+        text-align: left;
+        line-height: 1.5em;
+    }
+
+    .title-img {
+        float: left;
+        margin-right: 1em;
+        text-align: left;
+    }
+
+    .title-img img {
+        margin-top: 7px;
+        width: 7em;
+    }
+
+    nav li a {
+        display: block;
+        margin-top: 1.5em;
+        padding: .35em .15em;
+    }
+
+    .main article {
+        padding: 15px;
+    }
+
+    .main aside {
+        padding: 15px;
+        width: 31%;
+    }
+
+    .main aside i {
+        visibility: visible;
+    }
+}
+
+@media only screen and (min-width: 1140px) {
+    .main article {
+        padding: 30px;
+        width: 70%;
+    }
+
+    .main aside {
+        padding: 30px;
+    }
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+/* ====================
+    INTERMEDIATE: Menu
+   ==================== */
+
+    nav a {
+        float: left;
+        width: 27%;
+        margin: 0 1.7%;
+        padding: 25px 1%;
+        margin-bottom: 0;
+    }
+
+    nav li:first-child a {
+        margin-left: 0;
+    }
+
+    nav li:last-child a {
+        margin-right: 0;
+    }
+
+/* ========================
+    INTERMEDIATE: IE Fixes
+   ======================== */
+
+    nav ul li {
+        display: inline;
+    }
+
+    .oldie nav a {
+        margin: 0 0.7%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+/* ====================
+    WIDE: CSS3 Effects
+   ==================== */
+
+    .header-container,
+    .main aside {
+        -webkit-box-shadow: 0 5px 10px #aaa;
+           -moz-box-shadow: 0 5px 10px #aaa;
+                box-shadow: 0 5px 10px #aaa;
+    }
+
+/* ============
+    WIDE: Menu
+   ============ */
+
+    .title {
+        float: left;
+    }
+
+    nav {
+        float: right;
+        width: 38%;
+    }
+
+/* ============
+    WIDE: Main
+   ============ */
+
+    .main article {
+        float: left;
+        width: 56%;
+    }
+
+    .main aside {
+        float: right;
+        width: 26%;
+    }
+}
+
+@media only screen and (min-width: 1140px) {
+
+/* ===============
+    Maximal Width
+   =============== */
+
+    .wrapper {
+        width: 1026px; /* 1140px - 10% for margins */
+        margin: 0 auto;
+    }
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
