@@ -1,15 +1,16 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var NedbStore = require('connect-nedb-session')(session);
-var passport = require('passport');
-var localSetup = require('./config/local');
-var flash = require('express-flash');
-var hbs = require('hbs');
-var hbsConfig = require('./config/handlebars');
+var express = require('express'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    NedbStore = require('connect-nedb-session')(session),
+    passport = require('passport'),
+    localSetup = require('./config/local'),
+    flash = require('express-flash'),
+    hbs = require('express-hbs'),
+    hbsConfig = require('./config/handlebars');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -17,22 +18,21 @@ var users = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.engine('html', hbs.express4({
+    partialsDir: __dirname + '/views/partials',
+    defaultLayout: __dirname + '/views/layout.html'
+}));
 app.set('view engine', 'html');
-app.engine('html', require('hbs').__express);
-hbs.registerPartials(__dirname + '/views/partials');
 hbsConfig();
+app.set('views', path.join(__dirname, 'views'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(flash());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser('t3nt-s3cr3tz'));
 app.use(session({
     secret: 't3nt-s3cr3tz',
     name: 't3nt',
@@ -41,7 +41,15 @@ app.use(session({
     },
     store: new NedbStore({
         filename: 'data/sessions'
-    })
+    }),
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(flash());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
 }));
 
 app.use(passport.initialize());

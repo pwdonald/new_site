@@ -196,6 +196,17 @@ footer:hover {
     text-align: center;
 }
 
+.legal a {
+    font-size: .75em;
+    padding: .5em;
+    color: #aaa;
+    text-decoration: none;
+}
+
+.legal a:hover {
+    color: white;
+}
+
 .footer-container footer p a i {
     color: white;
     font-size: 2em;
@@ -345,6 +356,8 @@ article {
 
 article h1, article h2, article h3 {
     font-weight: lighter;
+    line-height: 1em;
+
 }
 
 article h2, article h3 {
@@ -497,6 +510,7 @@ article p {
     padding: .3em;
     background-color: white;
     border-radius: 50%;
+    text-align: center;
 }
 
 .author-info {
@@ -521,6 +535,7 @@ article p {
 }
 
 .author-pic {
+    border: 1px solid #aaa;
     display: inline-block;
     width: 50px;
     height: 50px;

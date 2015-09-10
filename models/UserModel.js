@@ -6,7 +6,7 @@ var User = new Datastore({
     autoload: true
 });
 
-exports.FindById = function(id, callback) {
+exports.findById = function(id, callback) {
     User.findOne({
         _id: id
     }, callback);
@@ -15,10 +15,12 @@ exports.FindById = function(id, callback) {
 exports.findByUsername = function(username, callback) {
     User.findOne({
         username: username
-    }, callback);
+    }, function(err, user) {
+        callback(err, user);
+    });
 };
 
-exports.IsUsernameAvailable = function(req, res, next) {
+exports.isUsernameAvailable = function(req, res, next) {
     User.findOne({
         username: req.body.username
     }, function(err, user) {
@@ -28,14 +30,15 @@ exports.IsUsernameAvailable = function(req, res, next) {
 
         if (user) {
             // not available
-            return next(new Error('Username already exists'));
+            req.flash('error', 'Username invalid.');
+            res.redirect('/register');
         }
 
         next();
     });
 };
 
-exports.HashPassword = function(req, res, next) {
+exports.hashPassword = function(req, res, next) {
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(req.body.password, salt, function(err, hashedPassword) {
             req.body.hashedPassword = hashedPassword;
@@ -44,14 +47,15 @@ exports.HashPassword = function(req, res, next) {
     });
 };
 
-exports.CheckPassword = function(user, password, callback) {
+exports.checkPassword = function(user, password, callback) {
     bcrypt.compare(password, user.password, callback);
 };
 
-exports.CreateNewUser = function(req, res, next) {
+exports.createNewUser = function(req, res, next) {
     User.insert({
         username: req.body.username,
         password: req.body.hashedPassword,
+        role: 0,
         timestamp: new Date()
     }, function(err, user) {
         if (err) {
@@ -59,6 +63,38 @@ exports.CreateNewUser = function(req, res, next) {
         }
 
         req.body.username = user.username;
+
+        next();
+    });
+};
+
+exports.getUserProfile = function(req, res, next) {
+    User.findOne({
+        _id: req.body.id
+    }, function(err, user) {
+        if (err) {
+            next(err);
+        }
+
+        req.body.profile = user.profile;
+
+        next();
+    });
+};
+
+exports.updateUserProfile = function(req, res, next) {
+    User.update({
+        _id: req.user._id
+    }, {
+        $set: {
+            profile: req.user.profile
+        }
+    }, function(err, num, updatedUser) {
+        if (err) {
+            next(err);
+        }
+
+        req.user = updatedUser;
 
         next();
     });

@@ -12,9 +12,9 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/forms.css">
+        <link rel="stylesheet" href="/css/normalize.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/forms.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
@@ -27,7 +27,9 @@
 
         <div class="main-container">
             <h1 class="subhead">{{pageName}}</h1>
-            <h1 class="icon"><i class="fa fa-{{pageIcon}}"></i></h1>
+            {{#if pageIcon}}
+                <h1 class="icon"><i class="fa fa-{{pageIcon}}"></i></h1>
+            {{/if}}
             <div class="main wrapper clearfix">
             	{{{body}}}
 

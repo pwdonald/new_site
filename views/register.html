@@ -1,14 +1,18 @@
+<article class="page">
 <form action="/users/register" method="post">
     <strong>{{error}}</strong>
     <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
+        <h3>Email</h3>
+        <input type="email" name="username" autofocus />
     </div>
     <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
+        <h3>Password</h3>
+        <input type="password" name="password" />
+        <h3>Confirm Password</h3>
+        <input type="password" name="confirmpassword" />
     </div>
     <div>
-        <input type="submit" value="Register"/>
+        <input class="btn" type="submit" value="Register"/>
     </div>
 </form>
+</article>
