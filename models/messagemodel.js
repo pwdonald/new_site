@@ -1,18 +1,21 @@
-var Datastore = require('nedb'),
-    Message = new Datastore({
-        filename: 'data/messages'
-    });
+var _ = require('underscore'),
+    Datastore = require('nedb');
 
-var requiredFields = function() {
-    return [
-        'first',
-        'last',
-        'email',
-        'confirmEmail',
-        'dayPhone',
-        'message'
-    ];
-};
+
+var Message = new Datastore({
+    filename: 'data/messages',
+    autoload: true
+});
+
+var requiredFields = [
+    'ip',
+    'firstName',
+    'lastName',
+    'email',
+    'confirmEmail',
+    'dayPhone',
+    'message'
+];
 
 var validateInputString = function(str) {
     if (str && str.trim() !== '') {
@@ -23,47 +26,39 @@ var validateInputString = function(str) {
 };
 
 exports.findById = function(id, callback) {
-
+    Message.findOne({
+        _id: id
+    }, callback);
 };
 
 exports.find = function(query, callback) {
-
+    Message.find(query, callback);
 };
 
-exports.validate = function(req, res, next) {
-    var missingFields = requiredFields();
+exports.saveMessage = function(message, callback) {
+    message = _.pick(message, 'eveningPhone', requiredFields);
 
-    if (!req.body) {
-        req.flash('error', {
-            message: 'Submission Error.',
-            fields: missingFields
-        });
-        return res.redirect('/contact');
-    }
+    this.validate(message, function(invalid) {
+        if (invalid && invalid.length > 0) {
+            return callback(invalid);
+        }
 
-    if (validateInputString(req.body.first)) {
-        missingFields.pop();
-    }
-
-    if (validateInputString(req.body.last)) {
-        missingFields.pop();
-    }
-
-    if (validateInputString(req.body.email)) {
-        var email = req.body.email;
-
-        missingFields.pop();
-
-        if (validateInputString(req.body.confirmEmail)) {
-            var confirm = req.body.confirmEmail;
-
-            if (email === confirm) {
-                missingFields.pop();
+        Message.insert(message, function(err, savedMessage) {
+            if (err) {
+                return callback(err);
             }
-        };
-    }
 
-    if (validateInputString(req.body.dayPhone)) {
+            callback(null, savedMessage);
+        });
+    });
+};
 
-    };
+exports.validate = function(message, callback) {
+    var invalid = requiredFields.filter(function(field) {
+        if (!message[field] || !validateInputString(message[field])) {
+            return field;
+        }
+    }, this);
+
+    callback(invalid);
 };
