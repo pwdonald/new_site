@@ -1,0 +1,34 @@
+form {
+	input {
+		border: 1px solid #aaa;
+		padding: .2em;
+	}
+}
+
+.page form {
+	@import 'variables';
+
+	padding: 1em;
+	background: @secondaryBackground;
+
+	div {
+		margin-top: .5em;
+	}
+
+	textarea {
+		width: 92%;
+		height: 10em;
+	}
+
+	input[type=text] {
+		margin: .2em 0;
+	}
+}
+
+article {
+	&.page {
+		border: 0;
+		padding: 0;
+		margin: 0;
+	}
+}

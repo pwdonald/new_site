@@ -1,7 +1,4 @@
 <aside>
-    {{#if user}}
-        Logged in as {{user.username}}
-    {{/if}}
     <a href="/contact" title="Contact"><i class="fa fa-envelope"></i></a>
     <a href="#github" title="Github"><i class="fa fa-github-square"></i></a>
     <a href="#linkedin" title="LinkedIn"><i class="fa fa-linkedin-square"></i></a>
@@ -16,4 +13,14 @@
         <li><small>01/01/16</small> <a href="#">A new post will appear here.</a></li>
         <li><small>01/01/16</small> <a href="#">A new post will appear here.</a></li>
     </ul>
+    {{#if user}}
+        <section id="user-info">
+            <h3>User Info</h3>
+            <span class="username">{{user.username}}</span>
+            {{#if role}}
+                <a href="/admin" class="btn" title="Admin">Access Admin</a>
+            {{/if}}
+            <a href="/logout" class="btn btn-failure" title="Log out">Log out</a>
+        </section>
+    {{/if}}
 </aside>

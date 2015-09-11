@@ -9,7 +9,7 @@ var confirmPassword = function(req, res, next) {
 
     if (password !== confirmpassword) {
         req.flash('error', 'Passwords do not match!');
-        res.redirect('/register');
+        return res.redirect('/register');
     }
 
     next();

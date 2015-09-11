@@ -31,7 +31,7 @@ exports.isUsernameAvailable = function(req, res, next) {
         if (user) {
             // not available
             req.flash('error', 'Username invalid.');
-            res.redirect('/register');
+            return res.redirect('/register');
         }
 
         next();

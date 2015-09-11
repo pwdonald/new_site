@@ -184,8 +184,7 @@ footer:hover {
     cursor: default;
 }
 
-.footer-container,
-.main aside {
+.footer-container {
     border-top: 20px solid rgb(40,133,217);
 }
 
@@ -342,14 +341,6 @@ nav a:hover {
     text-decoration: none
 }
 
-.main aside {
-    border-top: 0;
-}
-
-.main aside form {
-    margin-top: 10px;
-}
-
 article {
     padding: 0;
 }
@@ -431,12 +422,6 @@ article p {
             box-shadow: 0 2px 6px #aaa !important;
 }
 
-.main aside {
-    -webkit-box-shadow: none;
-       -moz-box-shadow: none;
-            box-shadow: none !important;
-}
-
 .title-img {
     text-align: center;
 }
@@ -445,57 +430,7 @@ article p {
     width: 10em;
 }
 
-.main aside h3 {
-    color: #aaa;
-    font-weight: lighter;
-}
 
-.main aside ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.main aside ul li a {
-    text-decoration: none;
-    font-weight: lighter;
-    color: black;
-    padding-bottom: 2px;
-    border-bottom: 1px solid white;
-}
-
-.main aside ul li a:visited {
-    color: #aaa;
-    text-decoration: none;
-}
-
-.main aside ul li a:hover {
-    color: blue;
-    padding-bottom: 2px;
-    border-bottom: 1px solid blue;
-}
-
-.main aside ul li small {
-    font-size: 75%;
-    color: #aaa;
-    display: block;
-    margin: 0;
-    padding: 0;
-}
-
-.main aside i {
-    color: #aaa;
-    font-size: 2em;
-    visibility: hidden;
-    -webkit-transition: color .5s ease-out;
-    -moz-transition: color .5s ease-out;
-    -o-transition: color .5s ease-out;
-    transition: color .5s ease-out;
-}
-
-.main aside i:hover {
-    color: black;
-}
 
 .icon {
     padding: 0;
@@ -568,7 +503,6 @@ article p {
     }
 
     article {
-        border: 1px solid #aaa;
         padding: 30px;
     }
 }
@@ -600,24 +534,12 @@ article p {
         padding: 15px;
     }
 
-    .main aside {
-        padding: 15px;
-        width: 31%;
-    }
-
-    .main aside i {
-        visibility: visible;
-    }
 }
 
 @media only screen and (min-width: 1140px) {
     .main article {
         padding: 30px;
         width: 70%;
-    }
-
-    .main aside {
-        padding: 30px;
     }
 }
 

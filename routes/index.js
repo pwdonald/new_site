@@ -3,7 +3,7 @@ var router = express.Router();
 
 var alreadyLoggedIn = function(req, res, next) {
     if (req.user && req.isAuthenticated()) {
-        res.redirect('/app');
+        res.redirect('/');
     } else {
         next();
     }
@@ -24,7 +24,7 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', alreadyLoggedIn, function(req, res, next) {
     res.render('login', {
         error: req.flash('error'),
         pageName: 'login',
@@ -39,7 +39,7 @@ router.get('/logout', function(req, res, next) {
     });
 });
 
-router.get('/register', function(req, res, next) {
+router.get('/register', alreadyLoggedIn, function(req, res, next) {
     res.render('register', {
         pageName: 'register',
         pageIcon: 'user-plus',

@@ -1,0 +1,108 @@
+@import 'variables';
+
+.main > aside {
+	@media only screen and (min-width: 768px) {
+		padding: 15px;
+        width: 31%;
+
+		i {
+	        visibility: visible;
+	    }
+    }
+
+    @media only screen and (min-width: 1140px) {
+    	padding: 30px;
+    }
+
+	border-top: 0;
+
+	-webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none !important;
+
+	form {
+		margin-top: 10px;
+	}
+
+	h3 {
+	    color: #aaa;
+	    font-weight: lighter;
+	}
+
+	ul {
+		list-style: none;
+    	padding: 0;
+    	margin: 0;
+
+    	li {
+    		small {
+    			font-size: 75%;
+			    color: #aaa;
+			    display: block;
+			    margin: 0;
+			    padding: 0;
+    		}
+
+    		a {
+    			text-decoration: none;
+			    font-weight: lighter;
+			    color: black;
+			    padding-bottom: 2px;
+			    border-bottom: 1px solid white;
+    		}
+
+    		a:visited {
+    			color: #aaa;
+    			text-decoration: none;
+    		}
+
+    		a:hover {
+    			color: blue;
+    			padding-bottom: 2px;
+    			border-bottom: 1px solid blue;
+    		}
+    	}
+	}
+
+	a {
+		i {
+		color: #aaa;
+	    font-size: 2em;
+	    -webkit-transition: color .5s ease-out;
+	    -moz-transition: color .5s ease-out;
+	    -o-transition: color .5s ease-out;
+	    transition: color .5s ease-out;
+		}
+
+		i:hover {
+		    color: black;
+		}
+	}
+
+    #user-info {
+    	margin: 1em auto;
+    	font-weight: lighter;
+    	font-size: 75%;
+    	padding: 1em;
+    	border-left: 1px solid #aaa;
+
+    	.btn {
+    		color: black;
+    	}
+
+        .btn:hover {
+            color: white;
+        }
+
+    	.username {
+    		display: block;
+    		margin: 0.5em 0;
+    		font-weight: normal;
+    		color: black;
+    	}
+    	h3 {
+    		color: black;
+    		margin: 0.1em 0;
+    	}
+    }
+}
