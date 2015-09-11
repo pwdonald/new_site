@@ -1,27 +1,24 @@
 <article class="page">
-    <form action="/contact" method="post">
-        {{#if error}}
-            <strong>{{error}}</strong>
-        {{/if}}
-
+    <p id="response"></p>
+    <form action="javascript:submitForm();">
         <div>
             <h3>Name</h3>
-            <input type="text" name="firstName" placeholder="First Name" id="firstName" autofocus/>
-            <input type="text" name="lastName" placeholder="Last Name" id="lastName"/>
+            <input type="text" name="firstName" placeholder="First Name" id="firstName" required autofocus/>
+            <input type="text" name="lastName" placeholder="Last Name" id="lastName" required/>
         </div>
         <div>
             <h3>Email</h3>
-            <input type="email" name="email" placeholder="Contact Email" id="email"/>
-            <input type="email" name="confirmEmail" placeholder="Confirm Contact Email" id="confirmEmail"/>
+            <input type="email" name="email" placeholder="Contact Email" id="email" required />
+            <input type="email" name="confirmEmail" placeholder="Confirm Contact Email" id="confirmEmail" required />
         </div>
         <div>
             <h3>Phone</h3>
-            <input type="tel" name="dayPhone" placeholder="Day Phone Number" id="dayPhone"/>
+            <input type="tel" name="dayPhone" placeholder="Day Phone Number" id="dayPhone" required />
             <input type="tel" name="eveningPhone" placeholder="Evening Phone Number" id="phone"/>
         </div>
         <div>
             <h3>Message</h3>
-            <textarea name="message"></textarea>
+            <textarea name="message" required></textarea>
         </div>
         <div>
             <input class="btn" type="submit" value="Send"/>
@@ -29,3 +26,51 @@
 
     </form>
 </article>
+
+<script>
+    var submitForm = function(e) {
+        var values = $('form').serializeArray();
+
+        if (values[2].value.trim() === '' || values[3].value.trim() === '') {
+            return emailError('Please enter your email address.');
+        }
+
+        if (values[2].value !== values[3].value) {
+            return emailError();
+        }
+
+        var postResult = $.post('/api/message', values, function(data) {
+            $('form').hide();
+            setResponse('Thanks! Someone will contact you shortly!');
+        });
+
+        postResult.fail(function() {
+            setResponse('Something went wrong! Please try again!');
+            $('input').on('change', function() {
+                $('#response').html('');
+            });
+        });
+
+        return false;
+    };
+
+    var emailError = function(err) {
+        if (err) {
+            $('#response').html(err);
+        } else {
+            $('#response').html('Email addresses must match!');
+        }
+
+        var emailFields = $('input[type=email');
+
+        emailFields.addClass('invalid');
+        emailFields[0].focus();
+        emailFields.on('change', function() {
+            emailFields.removeClass('invalid');
+        });
+    };
+
+    var setResponse = function(response) {
+        $('#response').html(response);
+    };
+</script>
