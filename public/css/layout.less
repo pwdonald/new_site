@@ -1,0 +1,253 @@
+@import 'variables';
+
+html, body {
+	font: 16px/26px Helvetica, Helvetica Neue, Arial;
+	font-family: @font;
+}
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+
+    body {
+    	.icon {
+		    padding: 0;
+		    margin: -.75em 0;
+		    margin-bottom: 1em;
+		    text-align: center;
+		}
+
+		.icon i {
+		    width: 1em;
+		    margin: 0 auto;
+		    padding: .3em;
+		    background-color: white;
+		    border-radius: 50%;
+		    text-align: center;
+		}
+
+    	.subhead {
+    		&:hover {
+    			cursor: default;
+    		}
+
+	    	background: rgb(230, 240, 245);
+		    margin: 0;
+		    padding: 1em;
+		    font-weight: lighter;
+		    text-align: center;
+    	}
+
+    	article {
+		    padding: 0;
+
+		    .author-info {
+			    padding: .5em;
+			    background: rgb(230, 240, 245);
+			}
+
+			.author-info span {
+			    vertical-align: middle;
+			    font-size: 1.1em;
+			}
+
+			.author-info a {
+			    vertical-align: middle;
+			    border-radius: 0;
+			    display: inline-block;
+			    text-decoration: none;
+			}
+
+			.author-info a:hover {
+			    color: #aaa;
+			}
+
+			.author-pic {
+			    border: 1px solid #aaa;
+			    display: inline-block;
+			    width: 50px;
+			    height: 50px;
+			    border-radius: 50%;
+			    background-color: black;
+			    background-repeat: no-repeat;
+			    background-size: 120%;
+			    background-position: center -5px;
+			    background-image: url('https://avatars1.githubusercontent.com/u/285609?v=3&s=460');
+			}
+		}
+
+		article h1, article h2, article h3 {
+		    font-weight: lighter;
+		    line-height: 1em;
+
+		}
+
+		article h2, article h3 {
+		    color: #aaa;
+		    margin: 5px 0;
+		    padding: 0;
+		}
+
+		article h1 small {
+		    display: block;
+		    color: #aaa;
+		    font-size: 50%;
+		}
+
+		article p {
+		    padding: 0;
+		    margin: 5px 2px;
+		}
+
+		.article-footer {
+		    margin-top: 2%;
+		    border-top: 1px dotted #aaa;
+		}
+    }
+}
+
+.main {
+    padding: 30px 0;
+
+    article {
+    	h1 {
+    		font-size: 2em;
+    	}
+
+    	.author {
+		    font-size: 0.65em;
+		    color: #aaa;
+		    margin: 0;
+		    padding: 0;
+		}
+
+		.author a {
+		    color: #aaa;
+		    text-decoration: none;
+		}
+
+    	.previous,
+    	.next {
+    		margin-top: 1%;
+		    width: 50%;
+
+		    a {
+		    	&:hover {
+	    			color: black;
+				    padding-bottom: 2px;
+				    border-bottom: 1px solid black;
+	    		}
+	    		text-decoration: none;
+			    color: #aaa;
+			    border-bottom: 1px solid transparent;
+			    padding-bottom: 2px;
+		    }
+    	}
+
+    	.previous {
+    		float: left;
+    		text-align: left;
+    	}
+
+    	.next {
+    		float: right;
+    		text-align: right;
+    	}
+    }
+
+    aside {
+    	color: white;
+	    padding: 0px 5% 10px;
+	    background: white;
+	    color: black;
+    }
+
+	.interesting {
+		&.btn {
+		    padding: .25em .5em;
+		}
+	    text-align: center;
+	    margin: 1em 0;
+	}
+}
+
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+.ie7 .title {
+    padding-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+	.main {
+		article {
+			float: left;
+			width: 56%;
+		}
+
+		aside {
+			float: right;
+			width: 26%;
+		}
+	}
+}
+
+@media only screen and (min-width: 1140px) {
+    .wrapper {
+	    width: 1026px; /* 1140px - 10% for margins */
+	    margin: 0 auto;
+    }
+}

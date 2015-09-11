@@ -36,3 +36,60 @@ article {
 		margin: 0;
 	}
 }
+
+.btn {
+    border-radius: 5%;
+    padding: .5em 1em;
+    border: 1px solid #aaa;
+    background: transparent;
+    color: #aaa;
+    text-decoration: none;
+
+    -webkit-transition: background-color .5s ease-out;
+    -moz-transition: background-color .5s ease-out;
+    -o-transition: background-color .5s ease-out;
+    transition: background-color .5s ease-out;
+}
+
+.btn-small {
+    padding: .25em .5em;
+    font-size: .75em;
+}
+
+.btn:hover {
+    color: white;
+    background: rgb(40,133,217);
+}
+
+.btn.active {
+    color: white;
+    background: rgb(40,133,217);
+}
+
+.btn-success {
+    border: 1px solid rgb(0, 255, 0);
+    color: rgb(0, 255, 0);
+}
+
+.btn-success:hover {
+    color: black;
+    background-color: rgb(0, 242, 0);
+}
+
+.btn-success.active {
+    color: black;
+    background-color: rgb(0, 242, 0);
+}
+
+.btn-failure {
+    border: 1px solid red;
+    color: red;
+}
+
+.btn-failure:hover {
+    background-color: red;
+}
+
+.btn-failure.active {
+    background-color: red;
+}

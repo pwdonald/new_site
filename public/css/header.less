@@ -1,0 +1,66 @@
+.header-container {
+	border-top: 2px solid rgb(30,90,195);
+    border-bottom: 20px solid rgb(40,133,217);
+    background: white;
+    color: black;
+
+    -webkit-box-shadow: 0 2px 6px #aaa !important;
+       -moz-box-shadow: 0 2px 6px #aaa !important;
+            box-shadow: 0 2px 6px #aaa !important;
+
+    a {
+    	text-decoration: none;
+    }
+
+    header {
+   	    .title {
+		    color: black;
+		    font-weight: lighter;
+		    text-align: center;
+		}
+
+		.title-img {
+		    text-align: center;
+		}
+
+		.title-img img {
+		    width: 10em;
+		}
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .title {
+        text-align: center;
+    }
+
+    .title-img {
+        text-align: center;
+    }
+
+    .title-img img {
+        width: 5em;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+   .title {
+        text-align: left;
+        line-height: 1.5em;
+    }
+
+    .title-img {
+        float: left;
+        margin-right: 1em;
+        text-align: left;
+    }
+
+    .title-img img {
+        margin-top: 7px;
+        width: 7em;
+    }
+
+    .title {
+		float: left;
+	}
+}

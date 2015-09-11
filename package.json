@@ -22,5 +22,16 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "browserify": "^11.1.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-concurrent": "^2.0.3",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "jquery": "^2.1.4",
+    "stringify": "^3.1.0"
   }
 }

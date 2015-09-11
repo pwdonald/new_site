@@ -30,3 +30,7 @@ node_modules
 npm-debug.log
 
 data/
+
+*.css.map
+public/javascripts/index.js
+compiled.css

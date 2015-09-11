@@ -1,0 +1,96 @@
+nav {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		li {
+			a {
+				.active {
+			    	background: rgb(40,133,217);
+			    	color: white;
+			    }
+			    border-radius: 5%;
+			    display: block;
+			    margin-top: 1em;
+			    margin-bottom: 1em;
+			    padding: .5em .25em;
+			    font-weight: lighter;
+
+			    text-align: center;
+			    text-decoration: none;
+
+			    background: transparent;
+			    color: black;
+			    border: 1px solid rgb(40,133,217);
+			    -webkit-transition: background-color .5s ease-out;
+			    -moz-transition: background-color .5s ease-out;
+			    -o-transition: background-color .5s ease-out;
+			    transition: background-color .5s ease-out;
+			}
+		}
+	}
+
+	a {
+		&:visited {
+			color: black;
+		}
+
+		&:hover {
+			background: rgb(40,133,217);
+		    color: white;
+		    text-decoration: none
+		}
+
+		display: block;
+	    margin-bottom: 10px;
+	    padding: 15px 0;
+
+	    text-align: center;
+	    text-decoration: none;
+	    font-weight: bold;
+
+	    color: white;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	nav {
+		a {
+			float: left;
+	        width: 27%;
+	        margin: 0 1.7%;
+	        padding: 25px 1%;
+	        margin-bottom: 0;
+		}
+
+		li:first-child {
+			a {
+				margin-left: 0;
+			}
+		}
+
+		li:last-child {
+			a {
+				margin-right: 0;
+			}
+		}
+
+		ul {
+			li {
+				display: inline;
+			}
+		}
+
+		.oldie nav a {
+			margin: 0 0.7%;
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	nav {
+		float: right;
+		width: 38%;
+	}
+}
