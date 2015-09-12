@@ -1,16 +1,14 @@
 @import 'variables';
 
-html, body {
-	font: 16px/26px Helvetica, Helvetica Neue, Arial;
-	font-family: @font;
-}
-
 html {
     color: #222;
-    font-size: 1em;
     line-height: 1.4;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
 
     body {
+    	font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    	font-family: 'Open Sans', sans-serif;
     	.icon {
 		    padding: 0;
 		    margin: -.75em 0;
@@ -102,6 +100,7 @@ html {
 
 		.article-footer {
 		    margin-top: 2%;
+		    margin-bottom: 5%;
 		    border-top: 1px dotted #aaa;
 		}
     }
@@ -163,8 +162,16 @@ html {
 	    color: black;
     }
 
+    #btns {
+    	margin: 0 auto;
+    	text-align: center;
+    }
+
 	.interesting {
-		&.btn {
+		.btn {
+			margin: 0.2em;
+			width: 2em;
+			display: inline-block;
 		    padding: .25em .5em;
 		}
 	    text-align: center;

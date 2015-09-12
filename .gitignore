@@ -30,7 +30,9 @@ node_modules
 npm-debug.log
 
 data/
-
+*.css
+!*.normalize.css
+!*.normalize.min.css
 *.css.map
 public/javascripts/index.js
 compiled.css

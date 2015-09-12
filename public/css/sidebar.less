@@ -1,20 +1,14 @@
 @import 'variables';
 
 .main > aside {
-	@media only screen and (min-width: 768px) {
-		padding: 15px;
-        width: 31%;
 
-		i {
-	        visibility: visible;
-	    }
-    }
-
-    @media only screen and (min-width: 1140px) {
-    	padding: 30px;
+    i {
+        display: none;
     }
 
 	border-top: 0;
+    padding: 1%;
+    text-align: center;
 
 	-webkit-box-shadow: none;
        -moz-box-shadow: none;
@@ -85,6 +79,7 @@
     	font-size: 75%;
     	padding: 1em;
     	border-left: 1px solid #aaa;
+        text-align: left;
 
     	.btn {
     		color: black;
@@ -104,5 +99,18 @@
     		color: black;
     		margin: 0.1em 0;
     	}
+    }
+
+    @media only screen and (min-width: 768px) {
+        padding: 15px;
+        width: 31%;
+
+        i {
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 1140px) {
+        padding: 30px;
     }
 }
