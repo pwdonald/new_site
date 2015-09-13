@@ -1,7 +1,7 @@
 var Backbone = require('backbone'),
     AdminRouter = require('./router');
 
-var AdminClient = {
+var client = {
     init: function() {
         this.router = new AdminRouter();
         Backbone.history.start({
@@ -10,8 +10,6 @@ var AdminClient = {
     }
 };
 
-var client = new AdminClient();
-
 client.init();
 
-module.exports = AdminClient;
+module.exports = client;

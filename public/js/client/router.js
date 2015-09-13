@@ -1,4 +1,5 @@
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+	DashboardController = require('./dashboard/dashboard.controller');
 
 var adminRouter = Backbone.Router.extend({
 	routes:{
@@ -6,7 +7,7 @@ var adminRouter = Backbone.Router.extend({
 	},
 
 	dashboard: function() {
-
+		this.currentController = new DashboardController();
 	}
 });
 

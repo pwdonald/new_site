@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/css/normalize.min.css">
         <link rel="stylesheet" href="/css/compiled.css">
 
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -37,15 +37,18 @@
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
-        {{#if user.role}}
-            <script src="javascripts/admin.js"></script>
-        {{/if}}
-
         {{> footer}}
 
-        <script src="javascripts/index.js"></script>
+        <script src="/javascripts/index.js"></script>
 
         <script src="//localhost:35729/livereload.js"></script>
+
+        
+        {{#if user}}
+        	{{#if role}}
+            <script src="/javascripts/admin.js"></script>
+            {{/if}}
+        {{/if}}
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!--<script>

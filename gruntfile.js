@@ -4,7 +4,7 @@ module.exports = function(grunt) {
             dev: {
                 files: {
                     'public/javascripts/index.js': 'public/js/main.js',
-                    'public/javascripts/admin.js': 'public/js/client/admin.js'
+                    'public/javascripts/admin.js': 'public/js/client/adminclient.js'
                 },
                 options: {
                     transform: ['stringify'],
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 
         watch: {
             client: {
-                files: ['views/**/*.html', 'public/js/**/*.js', 'public/css/**/*.less'],
+                files: ['views/**/*.html', 'public/js/**/*.js', 'public/css/**/*.less', 'public/**/*.html'],
                 tasks: ['concurrent:client'],
                 options: {
                     spawn: true,

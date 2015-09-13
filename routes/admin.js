@@ -1,4 +1,4 @@
-var express = require('express');=,
+var express = require('express'),
     router = express.Router();
 
 var isLoggedIn = function(req, res, next) {
@@ -14,3 +14,5 @@ router.get('/*', isLoggedIn, function(req, res) {
 		title: 'Admin'
 	});
 });
+
+module.exports = router;

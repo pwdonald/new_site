@@ -1,6 +1,6 @@
 <article class="page">
-    <p id="response" class="alert alert-danger">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <p id="response" class="alert alert-danger hidden">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span id="message"></span>
     </p>
     <form action="javascript:submitForm();">
         <div>
@@ -47,9 +47,11 @@
         });
 
         postResult.fail(function() {
+            $('#response').show();
             setResponse('Something went wrong! Please try again!');
             $('input').on('change', function() {
-                $('#response').html('');
+                $('#response').hide();
+                $('#message').html('');
             });
         });
 
@@ -57,10 +59,11 @@
     };
 
     var emailError = function(err) {
+        $('#response').removeClass('hidden');
         if (err) {
-            $('#response').html(err);
+            $('#message').html(err);
         } else {
-            $('#response').html('Email addresses must match!');
+            $('#message').html('Email addresses must match!');
         }
 
         var emailFields = $('input[type=email');
@@ -68,11 +71,13 @@
         emailFields.addClass('invalid');
         emailFields[0].focus();
         emailFields.on('change', function() {
+            $('#response').hide();
             emailFields.removeClass('invalid');
         });
     };
 
     var setResponse = function(response) {
-        $('#response').html(response);
+        $('#response').removeClass('hidden');
+        $('#message').html(response);
     };
 </script>

@@ -4,7 +4,13 @@ var Backbone = require('backbone'),
 var BaseView = Backbone.View.extend({
     render: function() {
         var compiledTemplate = Handlebars.compile(this.template);
-        this.$el.html(compiledTemplate(this.model.toJSON()));
+        if (this.model) {
+        	$(this.el).html(compiledTemplate(this.model.toJSON()));
+        } else {
+        	$(this.el).html(compiledTemplate(''));
+        }
+
+        this.trigger('render');
 
         return this;
     }
