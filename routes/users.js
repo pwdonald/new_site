@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     passport = require('passport'),
-    User = require('../models/UserModel');
+    User = require('../models/usermodel');
 
 var confirmPassword = function(req, res, next) {
     var password = req.body.password,

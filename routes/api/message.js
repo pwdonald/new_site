@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    Message = require('../models/messagemodel');
+    Message = require('../../models/messagemodel');
 
 var isAuthorized = function(req, res, next) {
     if (!req.user) {

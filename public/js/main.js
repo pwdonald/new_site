@@ -9,10 +9,6 @@ $(document).ready(function() {
     notifications.hide();
 });
 
-var submitContactMessage = function() {
-
-};
-
 window.displayNotification = function(message, alertType) {
     notifications.removeClass('hidden');
     notifications.children('#response')

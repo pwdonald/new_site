@@ -14,8 +14,11 @@ var express = require('express'),
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var api = require('./routes/api');
 var admin = require('./routes/admin');
+
+// api routes
+var message = require('./routes/api/message');
+var article = require('./routes/api/article');
 
 var app = express();
 
@@ -60,7 +63,8 @@ localSetup();
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api', api);
+app.use('/api', message);
+app.use('/api', article);
 app.use('/admin', admin);
 
 // catch 404 and forward to error handler
