@@ -1,7 +1,4 @@
 <article class="page">
-    <p id="response" class="alert alert-danger hidden">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span id="message"></span>
-    </p>
     <form action="javascript:submitForm();">
         <div>
             <h3>Name</h3>
@@ -43,15 +40,14 @@
 
         var postResult = $.post('/api/message', values, function(data) {
             $('form').hide();
-            setResponse('Thanks! Someone will contact you shortly!');
+            displayNotification('Thanks! Someone will contact you shortly!');
         });
 
         postResult.fail(function() {
             $('#response').show();
-            setResponse('Something went wrong! Please try again!');
+            displayNotification('Something went wrong! Please try again!', 'alert-danger');
             $('input').on('change', function() {
-                $('#response').hide();
-                $('#message').html('');
+                hideNotifications();
             });
         });
 
@@ -61,9 +57,9 @@
     var emailError = function(err) {
         $('#response').removeClass('hidden');
         if (err) {
-            $('#message').html(err);
+            displayNotification(err, 'alert-danger');
         } else {
-            $('#message').html('Email addresses must match!');
+            displayNotification('Email addresses must match!', 'alert-danger');
         }
 
         var emailFields = $('input[type=email');
@@ -71,13 +67,8 @@
         emailFields.addClass('invalid');
         emailFields[0].focus();
         emailFields.on('change', function() {
-            $('#response').hide();
+            hideNotifications();
             emailFields.removeClass('invalid');
         });
-    };
-
-    var setResponse = function(response) {
-        $('#response').removeClass('hidden');
-        $('#message').html(response);
     };
 </script>

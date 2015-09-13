@@ -30,6 +30,11 @@
                 <span class="icon"><i class="fa fa-{{pageIcon}}"></i></span>
             {{/if}}
             <div class="main wrapper clearfix">
+                <div id="notifications" class="hidden">
+                    <p id="response" class="alert">
+                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span id="message"></span>
+                    </p>
+                </div>
             	{{{body}}}
 
                 {{> aside}}
@@ -43,7 +48,7 @@
 
         <script src="//localhost:35729/livereload.js"></script>
 
-        
+
         {{#if user}}
         	{{#if role}}
             <script src="/javascripts/admin.js"></script>
