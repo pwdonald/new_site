@@ -3,7 +3,8 @@ module.exports = function(grunt) {
         browserify: {
             dev: {
                 files: {
-                    'public/javascripts/index.js': 'public/js/main.js'
+                    'public/javascripts/index.js': 'public/js/main.js',
+                    'public/javascripts/admin.js': 'public/js/client/admin.js'
                 },
                 options: {
                     transform: ['stringify'],
@@ -21,7 +22,7 @@ module.exports = function(grunt) {
                     sourceMapFileInline: true
                 },
                 files: {
-                    'public/css/compiled.css': 'public/css/**/*.less'
+                    'public/css/compiled.css': 'public/css/index.less'
                 }
             }
         },

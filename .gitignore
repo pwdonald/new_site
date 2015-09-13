@@ -35,4 +35,5 @@ data/
 !*.normalize.min.css
 *.css.map
 public/javascripts/index.js
+public/javascripts/admin.js
 compiled.css
