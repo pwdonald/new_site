@@ -2,8 +2,8 @@ var BaseView = require('../../base.view'),
 	MessageItemTemplate = require('./messages.dashitem.template.html');
 
 var MessageItemView = BaseView.extend({
-	el: '#messages',
 	template: MessageItemTemplate,
+	tagName: 'div',
 
 	initialize: function() {
 		if (this.model) {

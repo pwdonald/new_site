@@ -11,7 +11,9 @@ var isLoggedIn = function(req, res, next) {
 
 router.get('/*', isLoggedIn, function(req, res) {
 	res.render('admin', {
-		title: 'Admin'
+		title: 'Admin',
+		pageName: 'dashboard',
+		pageIcon: 'unlock'
 	});
 });
 

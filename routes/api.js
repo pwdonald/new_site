@@ -12,6 +12,7 @@ var isAuthorized = function(req, res, next) {
 
 router.post('/message', function(req, res) {
     req.body.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    req.body.unread = true;
     Message.saveMessage(req.body, function(err, message) {
         if (err) {
             return res.status(500).json(err);

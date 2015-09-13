@@ -1,4 +1,5 @@
-var BaseView = require('../base.view'),
+var _ = require('underscore'),
+	BaseView = require('../base.view'),
 	DashboardTemplate = require('./dashboard.template.html'),
 	MessageItemView = require('./items/messages.dashitem.view');
 
@@ -8,20 +9,26 @@ var DashboardView = BaseView.extend({
 
 	itemViews: [],
 
-	initialize: function() {
+	initialize: function(opts) {
+		_.each(_.keys(opts), function(key) {
+			this[key] = opts[key];
+		}, this);
+
 		if (this.model) {
 			this.listenTo(this.model, 'sync', this.render);
-			if (this.messageCollection) {
-					itemViews.push(new MessageItemView({
-					model: this.messageCollection
-				}.bind(this)));
-			}
-			this.on('render', function() {
-				this.itemViews.each(function(view) {
-					view.render();
-				});
-			});
 		}
+
+		this.on('render', function() {
+			if (this.messageCollection) {
+				this.itemViews.push(new MessageItemView({
+					el: $('#dashitems'),
+					model: this.messageCollection
+				}));
+			}
+			_.each(this.itemViews, function(view) {
+				view.render();
+			});
+		});
 	}
 });
 
