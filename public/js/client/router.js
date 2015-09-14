@@ -1,14 +1,20 @@
 var Backbone = require('backbone'),
-	DashboardController = require('./dashboard/dashboard.controller');
+    EditorController = require('./articles/editor.controller'),
+    DashboardController = require('./dashboard/dashboard.controller');
 
 var adminRouter = Backbone.Router.extend({
-	routes:{
-		'*default': 'dashboard'
-	},
+    routes: {
+        'article/editor/(:id)': 'editor',
+        '*default': 'dashboard'
+    },
 
-	dashboard: function() {
-		this.currentController = new DashboardController();
-	}
+    editor: function(id) {
+        this.currentController = new EditorController(id);
+    },
+
+    dashboard: function() {
+        this.currentController = new DashboardController();
+    }
 });
 
 module.exports = adminRouter;

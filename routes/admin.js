@@ -9,12 +9,20 @@ var isLoggedIn = function(req, res, next) {
     }
 };
 
+router.get('/article/editor/*', isLoggedIn, function(req, res) {
+    res.render('admin', {
+        title: 'Editor',
+        pageName: 'editor',
+        pageIcon: 'file-text'
+    });
+});
+
 router.get('/*', isLoggedIn, function(req, res) {
-	res.render('admin', {
-		title: 'Admin',
-		pageName: 'dashboard',
-		pageIcon: 'unlock'
-	});
+    res.render('admin', {
+        title: 'Admin',
+        pageName: 'dashboard',
+        pageIcon: 'unlock'
+    });
 });
 
 module.exports = router;
