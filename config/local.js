@@ -1,6 +1,6 @@
 var passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    User = require('../models/UserModel');
+    User = require('../models/usermodel');
 
 var validateUser = function(username, password, callback) {
     checkUsername(username, password, checkPassword, callback.bind(this));
