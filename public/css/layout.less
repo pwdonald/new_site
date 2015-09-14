@@ -22,11 +22,14 @@ html {
 
 		.icon i {
 			font-size: 2em;
-		    margin: 0 auto;
-		    padding: .3em;
+		    padding: 0;
+		    vertical-align: middle;
 		    background-color: white;
 		    border-radius: 50%;
+		    width: 1.5em;
+		    height: 1.5em;
 		    text-align: center;
+		    line-height: 1.5em;
 		}
 
     	.subhead {
@@ -45,6 +48,7 @@ html {
 		    padding: 0;
 
 		    .author-info {
+		    	text-align: right;
 			    padding: .5em;
 			    background: rgb(230, 240, 245);
 			}
@@ -97,6 +101,22 @@ html {
 		    font-size: 50%;
 		}
 
+		article p.tags {
+			padding: 0;
+			margin: 0;
+			border-bottom: 1px solid #aaa;
+			a {
+				font-size: 0.75em;
+				padding: 1px;
+
+				&:hover {
+					background-color: white;
+					font-weight: bold;
+					text-decoration: none;
+				}
+			}
+		}
+
 		article p {
 		    padding: 0;
 		    margin: 5px 2px;
@@ -123,6 +143,7 @@ html {
 		    color: #aaa;
 		    margin: 0;
 		    padding: 0;
+		    text-align: right;
 		}
 
 		.author a {
