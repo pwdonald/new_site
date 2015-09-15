@@ -16,7 +16,14 @@
     {{#if user}}
         <section id="user-info">
             <h3>User Info</h3>
-            <span class="username">{{user.username}}</span>
+            {{#if user.profile.alias}}
+                <span class="username">{{user.profile.alias}}</span>
+            {{else}}
+                {{#if user.profile.fullName}}
+                    <span class="username">{{user.profile.fullName}}</span>
+                {{/if}}
+            {{/if}}
+            <a href="/admin/profile/edit" title="Edit Profile"><span class="username">{{user.username}}</span></a>
             {{#if role}}
                 <a href="/admin" class="btn" title="Admin">Access Admin</a>
             {{/if}}

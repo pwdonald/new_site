@@ -59,8 +59,10 @@ exports.createNewUser = function(req, res, next) {
         profile: {
             fullName: '',
             alias: '',
+            publicEmail: '',
             location: '',
-            avatarUrl: ''
+            avatarUrl: '',
+            bio: ''
         },
         timestamp: new Date()
     }, function(err, user) {
@@ -98,14 +100,16 @@ exports.updateUserProfile = function(req, res, next) {
         _id: req.user._id
     }, {
         $set: {
-            profile: req.body.profile
+            profile: req.body
         }
-    }, function(err, num, updatedUser) {
+    }, function(err, num) {
         if (err) {
             next(err);
         }
 
-        req.user = updatedUser;
+        if (num < 0) {
+            res.status(500).end();
+        }
 
         next();
     });

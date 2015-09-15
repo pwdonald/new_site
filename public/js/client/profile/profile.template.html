@@ -1,0 +1,29 @@
+<article class="page">
+    <form>
+        <h2>User Profile</h2>
+        <div>
+            <h3>Name</h3>
+            <input value="{{fullName}}" type="text" name="fullName" placeholder="Full Name" id="fullName" required autofocus/>
+            <input value="{{alias}}" type="text" name="alias" placeholder="Display Name" id="alias"/>
+        </div>
+        <div>
+            <h3>Public Email</h3>
+            <input value="{{publicEmail}}" type="publicEmail" name="publicEmail" placeholder="Public Email" id="publicEmail" required />
+        </div>
+        <div>
+            <h3>Location</h3>
+            <input value="{{location}}" type="text" name="location" placeholder="location" id="location" />
+        </div>
+        <div>
+            <h3>Avatar URL</h3>
+            <input value="{{avatarUrl}}" type="text" name="avatarUrl" placeholder="Avatar URL" id="avatarUrl" />
+        </div>
+        <div>
+            <h3>Bio</h3>
+            <textarea id="bio" name="bio">{{bio}}</textarea>
+        </div>
+        <div>
+            <input class="btn" type="submit" value="save"/>
+        </div>
+    </form>
+</article>

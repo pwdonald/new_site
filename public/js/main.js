@@ -2,6 +2,7 @@ var $ = window.jQuery = window.$ = require('jquery');
 var bootstrap = window.bootstrap = require('bootstrap');
 
 var notifications;
+var addedClass;
 
 $(document).ready(function() {
     notifications = $('#notifications');
@@ -10,16 +11,24 @@ $(document).ready(function() {
 });
 
 window.displayNotification = function(message, alertType) {
+    addedClass = alertType;
+
     notifications.removeClass('hidden');
     notifications.children('#response')
-        .addClass(alertType)
+        .addClass(addedClass)
         .html(message);
-    notifications.show().fadeIn(500);
+    var fade = notifications.fadeIn(500);
+
+    $.when(fade).done(function() {
+        setTimeout(window.hideNotifications, 3000);
+    });
 };
 
 window.hideNotifications = function() {
-    notifications.children('#response')
-        .attr('class', 'alert');
+    var fade = notifications.fadeOut(500);
 
-    notifications.hide().fadeOut(500);
+    $.when(fade).done(function() {
+        notifications.children('#response')
+            .removeClass(addedClass);
+    });
 };

@@ -17,6 +17,14 @@ router.get('/article/editor/*', isLoggedIn, function(req, res) {
     });
 });
 
+router.get('/profile/edit/', isLoggedIn, function(req, res) {
+    res.render('admin', {
+        title: 'Edit Profile',
+        pageName: 'Profile',
+        pageIcon: 'user'
+    });
+});
+
 router.get('/*', isLoggedIn, function(req, res) {
     res.render('admin', {
         title: 'Admin',
