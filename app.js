@@ -19,6 +19,7 @@ var admin = require('./routes/admin');
 // api routes
 var message = require('./routes/api/message');
 var article = require('./routes/api/article');
+var profile = require('./routes/api/profile');
 
 var app = express();
 
@@ -66,6 +67,7 @@ app.use('/users', users);
 app.use('/api', message);
 app.use('/api', article);
 app.use('/admin', admin);
+app.use('/api/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

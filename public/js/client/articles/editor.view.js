@@ -12,15 +12,17 @@ var EditorView = BaseView.extend({
 
     initialize: function() {
         this.on('render', function() {
+            this.$('#articleName').on('input', this.compile);
             this.$('#textedit').on('input', this.compile);
         }, this);
     },
 
     compile: function(evt) {
         var rendered = $('#rendered');
+        var articleName = $('#articleName');
         var editor = $('#textedit');
         setTimeout(function() {
-            this.md = editor.val();
+            this.md = '# ' + articleName.val() + '\r\n' + editor.val();
 
             rendered.html(marked(this.md));
         }, 1000, this);

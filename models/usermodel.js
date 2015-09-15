@@ -56,6 +56,12 @@ exports.createNewUser = function(req, res, next) {
         username: req.body.username,
         password: req.body.hashedPassword,
         role: 0,
+        profile: {
+            fullName: '',
+            alias: '',
+            location: '',
+            avatarUrl: ''
+        },
         timestamp: new Date()
     }, function(err, user) {
         if (err) {
@@ -70,13 +76,18 @@ exports.createNewUser = function(req, res, next) {
 
 exports.getUserProfile = function(req, res, next) {
     User.findOne({
-        _id: req.body.id
+        _id: req.user._id
     }, function(err, user) {
         if (err) {
             next(err);
         }
 
-        req.body.profile = user.profile;
+        if (!user) {
+            res.status(500).end();
+            return;
+        }
+
+        req.body.profile = user.profile || {};
 
         next();
     });
@@ -87,7 +98,7 @@ exports.updateUserProfile = function(req, res, next) {
         _id: req.user._id
     }, {
         $set: {
-            profile: req.user.profile
+            profile: req.body.profile
         }
     }, function(err, num, updatedUser) {
         if (err) {
