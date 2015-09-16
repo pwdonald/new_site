@@ -5,6 +5,8 @@ var _ = require('underscore'),
 var ProfileView = BaseView.extend({
     el: '#admin',
     template: ProfileTemplate,
+    title: 'Edit Profile',
+    mainIcon: 'user',
 
     initialize: function(opts) {
         if (this.model) {

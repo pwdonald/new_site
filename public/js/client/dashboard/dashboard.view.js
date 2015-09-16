@@ -1,35 +1,45 @@
-var _ = require('underscore'),
-	BaseView = require('../base.view'),
-	DashboardTemplate = require('./dashboard.template.html'),
-	MessageItemView = require('./items/messages.dashitem.view');
+var client = require('../adminclient'),
+    _ = require('underscore'),
+    BaseView = require('../base.view'),
+    DashboardTemplate = require('./dashboard.template.html'),
+    MessageItemView = require('./items/messages.dashitem.view');
 
 var DashboardView = BaseView.extend({
-	el: '#admin',
-	template: DashboardTemplate,
+    el: '#admin',
+    template: DashboardTemplate,
+    title: 'dashboard',
+    mainIcon: 'unlock',
 
-	itemViews: [],
+    itemViews: [],
 
-	initialize: function(opts) {
-		_.each(_.keys(opts), function(key) {
-			this[key] = opts[key];
-		}, this);
+    initialize: function(opts) {
+        _.each(_.keys(opts), function(key) {
+            this[key] = opts[key];
+        }, this);
 
-		if (this.model) {
-			this.listenTo(this.model, 'sync', this.render);
-		}
+        if (this.model) {
+            this.listenTo(this.model, 'sync', this.render);
+        }
 
-		this.on('render', function() {
-			if (this.messageCollection) {
-				this.itemViews.push(new MessageItemView({
-					el: $('#dashitems'),
-					model: this.messageCollection
-				}));
-			}
-			_.each(this.itemViews, function(view) {
-				view.render();
-			});
-		});
-	}
+        this.on('render', function() {
+            if (this.messageCollection) {
+                this.itemViews.push(new MessageItemView({
+                    el: $('#dashitems'),
+                    model: this.messageCollection
+                }));
+            }
+            _.each(this.itemViews, function(view) {
+                view.render();
+            });
+
+            $('#editor').on('click', function(e) {
+                e.preventDefault();
+                client.router.navigate('article/editor/', {
+                    trigger: true
+                });
+            })
+        });
+    }
 });
 
 module.exports = DashboardView;

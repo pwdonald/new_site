@@ -9,28 +9,29 @@ var isLoggedIn = function(req, res, next) {
     }
 };
 
-router.get('/article/editor/*', isLoggedIn, function(req, res) {
-    res.render('admin', {
-        title: 'Editor',
-        pageName: 'editor',
-        pageIcon: 'file-text'
-    });
-});
+// router.get('/article/editor/*', isLoggedIn, function(req, res) {
+//     res.render('admin', {
+//         title: 'Editor',
+//         pageName: 'editor',
+//         pageIcon: 'file-text'
+//     });
+// });
 
-router.get('/profile/edit/', isLoggedIn, function(req, res) {
-    res.render('admin', {
-        title: 'Edit Profile',
-        pageName: 'Profile',
-        pageIcon: 'user'
-    });
-});
+// router.get('/profile/edit/', isLoggedIn, function(req, res) {
+//     res.render('admin', {
+//         title: 'Edit Profile',
+//         pageName: 'Profile',
+//         pageIcon: 'user'
+//     });
+// });
 
 router.get('/*', isLoggedIn, function(req, res) {
-    res.render('admin', {
-        title: 'Admin',
-        pageName: 'dashboard',
-        pageIcon: 'unlock'
-    });
+    res.render('admin');
+    // res.render('admin', {
+    //     title: 'Admin',
+    //     pageName: 'dashboard',
+    //     pageIcon: 'unlock'
+    // });
 });
 
 module.exports = router;

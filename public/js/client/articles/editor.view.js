@@ -7,6 +7,8 @@ var EditorView = BaseView.extend({
     md: '',
 
     el: '#admin',
+    title: 'editor',
+    mainIcon: 'file-text',
     tagName: 'div',
     template: EditorTemplate,
 

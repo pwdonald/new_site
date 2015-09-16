@@ -23,9 +23,9 @@
                     <span class="username">{{user.profile.fullName}}</span>
                 {{/if}}
             {{/if}}
-            <a href="/admin/profile/edit" title="Edit Profile"><span class="username">{{user.username}}</span></a>
+            <a href="/admin/profile/edit" title="Edit Profile" id="profile"><span class="username">{{user.username}}</span></a>
             {{#if role}}
-                <a href="/admin" class="btn" title="Admin">Access Admin</a>
+                <a href="/admin" class="btn" title="Admin" id="admin">Access Admin</a>
             {{/if}}
             <a href="/logout" class="btn btn-failure" title="Log out">Log out</a>
         </section>
