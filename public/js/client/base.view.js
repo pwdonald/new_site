@@ -13,25 +13,27 @@ var BaseView = Backbone.View.extend({
         }
 
         this.trigger('render');
-        this.handleUserLinks();
+        this.linkListener();
+
+        // TODO: move this to a higher abstraction
         AdminClient.updateSubHeader(this.title, this.mainIcon);
 
         return this;
     },
 
-    handleUserLinks: function() {
-        $('a#profile').on('click', function(e) {
-            e.preventDefault();
-            AdminClient.router.navigate('/profile/edit', {
-                trigger: true
-            });
-        });
+    linkListener: function() {
+        $('a').on('click', function(event) {
+            if (!$(this).attr('data-bypass')) {
+                event.preventDefault();
 
-        $('a#admin').on('click', function(e) {
-            e.preventDefault();
-            AdminClient.router.navigate('/admin', {
-                trigger: true
-            });
+                var route = $(this).attr('href');
+                var rootIndex = Backbone.history.options.root.length - 1;
+                route = route.substr(rootIndex);
+
+                AdminClient.router.navigate(route, {
+                    trigger: true
+                });
+            }
         });
     }
 });

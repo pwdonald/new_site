@@ -31,13 +31,6 @@ var DashboardView = BaseView.extend({
             _.each(this.itemViews, function(view) {
                 view.render();
             });
-
-            $('#editor').on('click', function(e) {
-                e.preventDefault();
-                client.router.navigate('article/editor/', {
-                    trigger: true
-                });
-            })
         });
     }
 });
