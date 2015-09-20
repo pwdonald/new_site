@@ -9,14 +9,6 @@ var alreadyLoggedIn = function(req, res, next) {
     }
 };
 
-var isLoggedIn = function(req, res, next) {
-    if (req.user && req.isAuthenticated()) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-};
-
 router.use(function(req, res, next) {
     res.locals.user = req.user;
     res.locals.role = (req.user ? req.user.role : 0);
@@ -24,7 +16,7 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/login', alreadyLoggedIn, function(req, res, next) {
+router.get('/login', alreadyLoggedIn, function(req, res) {
     res.render('login', {
         error: req.flash('error'),
         pageName: 'login',
@@ -32,14 +24,14 @@ router.get('/login', alreadyLoggedIn, function(req, res, next) {
     });
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', function(req, res) {
     req.session.destroy(function() {
         req.logout();
         res.redirect('/');
     });
 });
 
-router.get('/register', alreadyLoggedIn, function(req, res, next) {
+router.get('/register', alreadyLoggedIn, function(req, res) {
     res.render('register', {
         pageName: 'register',
         pageIcon: 'user-plus',
@@ -48,46 +40,46 @@ router.get('/register', alreadyLoggedIn, function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     res.redirect('/blog');
 });
 
-router.get('/blog', function(req, res, next) {
+router.get('/blog', function(req, res) {
     res.render('index', {
         pageName: 'blog',
         pageIcon: 'rss'
     });
 });
 
-router.get('/about', function(req, res, next) {
+router.get('/about', function(req, res) {
     res.render('index', {
         pageName: 'about',
         pageIcon: 'black-tie'
     });
 });
 
-router.get('/projects', function(req, res, next) {
+router.get('/projects', function(req, res) {
     res.render('index', {
         pageName: 'projects',
         pageIcon: 'code-fork'
     });
 });
 
-router.get('/contact', function(req, res, next) {
+router.get('/contact', function(req, res) {
     res.render('contactform', {
         pageName: 'contact',
         pageIcon: 'envelope'
     });
 });
 
-router.get('/terms', function(req, res, next) {
+router.get('/terms', function(req, res) {
     res.render('termsandconditions', {
         pageName: 'terms and conditions',
         pageIcon: 'gavel'
     });
 });
 
-router.get('/privacy', function(req, res, next) {
+router.get('/privacy', function(req, res) {
     res.render('privacy', {
         pageName: 'privacy',
         pageIcon: 'user-secret'

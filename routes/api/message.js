@@ -1,14 +1,7 @@
 var express = require('express'),
     router = express.Router(),
+    isAuthorized = require('../../middleware/isAuthorized'),
     Message = require('../../models/messagemodel');
-
-var isAuthorized = function(req, res, next) {
-    if (!req.user) {
-        return res.status(401).end();
-    }
-
-    next();
-};
 
 router.post('/message', function(req, res) {
     req.body.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;

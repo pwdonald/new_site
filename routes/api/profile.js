@@ -1,15 +1,8 @@
 var _ = require('underscore'),
     express = require('express'),
     router = express.Router(),
+    isAuthorized = require('../../middleware/isAuthorized'),
     User = require('../../models/usermodel');
-
-var isAuthorized = function(req, res, next) {
-    if (!req.user) {
-        return res.status(401).end();
-    }
-
-    next();
-};
 
 router.put('/', isAuthorized, User.updateUserProfile, function(req, res) {
     if (!req.user) {
