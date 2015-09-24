@@ -33,12 +33,14 @@ var validate = function(articleData) {
 };
 
 exports.find = function(query, callback) {
+    query.deleted = false;
     Article.find(query, callback);
 };
 
 exports.get = function(id, callback) {
     Article.findOne({
-        _id: id
+        _id: id,
+        deleted: false
     }, callback);
 };
 
