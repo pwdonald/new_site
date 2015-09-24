@@ -11,8 +11,6 @@ var requiredFields = [
     'publishDate',
     'tags',
     'content',
-    'interested',
-    'notInterested',
     'published'
 ];
 
@@ -21,11 +19,11 @@ var validate = function(articleData) {
     var article = articleData.article;
 
     if (article && article.published) {
-        _.each(_.pick(article, requiredFields), function(attr, key) {
-            if (!attr || attr.trim() === '') {
+        _.each(requiredFields, function(field) {
+            if (!article[field] || article[field] === '' || (article[field].trim && article[field].trim() === '')) {
                 errors.push({
-                    name: key,
-                    message: key + 'is required!'
+                    name: field,
+                    message: field + ' is required!'
                 });
             }
         });
