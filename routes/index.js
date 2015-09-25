@@ -1,5 +1,6 @@
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    User = require('../models/usermodel');
 
 var alreadyLoggedIn = function(req, res, next) {
     if (req.user && req.isAuthenticated()) {
@@ -51,13 +52,6 @@ router.get('/blog', function(req, res) {
     });
 });
 
-router.get('/about', function(req, res) {
-    res.render('index', {
-        pageName: 'about',
-        pageIcon: 'black-tie'
-    });
-});
-
 router.get('/projects', function(req, res) {
     res.render('index', {
         pageName: 'projects',
@@ -83,6 +77,29 @@ router.get('/privacy', function(req, res) {
     res.render('privacy', {
         pageName: 'privacy',
         pageIcon: 'user-secret'
+    });
+});
+
+router.get('/profile/:alias', function(req, res, next) {
+    var alias = req.params.alias;
+
+    User.find({
+        'profile.alias': alias
+    }, function(err, user) {
+        if (err) {
+            return next(err);
+        }
+
+        if (!user) {
+            res.status(404);
+            return next();
+        }
+
+        res.render('author', {
+            profile: user.profile,
+            pageName: user.profile.alias + '\'s profile',
+            pageIcon: 'user'
+        });
     });
 });
 

@@ -5,6 +5,16 @@ var User = new Datastore({
     filename: 'data/users'
 });
 
+exports.find = function(query, callback) {
+    User.loadDatabase(function(err) {
+        if (err) {
+            return callback(err);
+        }
+
+        User.findOne(query, callback);
+    });
+};
+
 exports.findById = function(id, callback) {
     User.loadDatabase(function(err) {
         if (err) {
@@ -109,6 +119,10 @@ exports.getUserProfile = function(req, res, next) {
 };
 
 exports.updateUserProfile = function(req, res, next) {
+    if (req.body && req.body.alias) {
+        req.body.alias = req.body.alias.toLowerCase();
+    }
+
     User.loadDatabase(function(err) {
         User.update({
             _id: req.user._id
