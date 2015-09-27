@@ -43,6 +43,9 @@ exports.saveMessage = function(message, callback) {
             return callback(invalid);
         }
 
+        message.timestamp = new Date();
+        message.read = false;
+
         Message.insert(message, function(err, savedMessage) {
             if (err) {
                 return callback(err);

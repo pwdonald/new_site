@@ -1,0 +1,34 @@
+.listbox {
+	.boxTitle {
+		padding: 1.5em;
+		margin-bottom: 1em;
+		border-bottom: 1px solid @secondaryBackground;
+
+		.contactDate {
+			font-weight: bold;
+			font-size: 1.1em;
+		}
+
+		.contactName {
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+
+		.contactEmail {
+			font-weight: lighter;
+			font-size: 1.1em;
+		}
+	}
+
+	.boxExpanded {
+		display: block;
+		height: 0;
+		overflow: hidden;
+	}
+
+	.boxExpandedOpen {
+		height: auto;
+		display: block;
+		overflow: visible;
+	}
+}

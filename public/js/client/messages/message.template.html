@@ -1,0 +1,38 @@
+<article id="messageList" class="listbox">
+	{{#each models}}
+		<div class="boxTitle">
+		<i class="fa fa-caret-down"></i>
+			<span class="contactDate">
+				{{timestamp}}
+			</span>
+			<span class="contactName">
+				{{lastName}}, {{firstName}}
+			</span>
+			<span class="contactEmail">
+				{{email}}
+			</span>
+		</div>
+		<div class="boxExpanded">
+			<div class="fieldName">Date</div>
+			<div class="fieldValue">{{timestamp}}</div>
+
+			<div class="fieldName">First Name</div>
+			<div class="fieldValue">{{firstName}}</div>
+			
+			<div class="fieldName">Last Name</div>
+			<div class="fieldValue">{{lastName}}</div>
+
+			<div class="fieldName">Email</div>
+			<div class="fieldValue">{{email}}</div>
+
+			<div class="fieldName">Day Phone</div>
+			<div class="fieldValue">{{dayPhone}}</div>
+
+			<div class="fieldName">Evening Phone</div>
+			<div class="fieldValue">{{eveningPhone}}</div>
+		
+			<div class="fieldName">Message</div>
+			<div class="fieldValue">{{message}}</div>
+		</div>
+	{{/each}}
+</article>

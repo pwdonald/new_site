@@ -1,15 +1,34 @@
-var Backbone = require('backbone'),
+var _ = require('underscore'),
+    Backbone = require('backbone'),
     Handlebars = require('handlebars'),
     AdminClient = require('./adminclient');
 
 var BaseView = Backbone.View.extend({
 
     render: function() {
+        if (this.collection) {
+            _.each(this.collection.models, function(model) {
+                if (model.get('timestamp')) {
+                    model.set('timestamp', new Date(model.get('timestamp')));
+                    var month = model.get('timestamp').getMonth() + 1;
+                    var date = model.get('timestamp').getDate();
+                    var year = model.get('timestamp').getFullYear();
+                    model.set('timestamp', month + '/' + date + '/' + year);
+                }
+            });
+        }
         var compiledTemplate = Handlebars.compile(this.template);
+
         if (this.model) {
             $(this.el).html(compiledTemplate(this.model.toJSON()));
         } else {
-            $(this.el).html(compiledTemplate(''));
+            if (this.collection) {
+                $(this.el).html(compiledTemplate({
+                    models: this.collection.toJSON()
+                }));
+            } else {
+                $(this.el).html(compiledTemplate(''));
+            }
         }
 
         this.trigger('render');

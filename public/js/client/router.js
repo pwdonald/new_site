@@ -5,6 +5,7 @@ var Backbone = require('backbone'),
 
 var adminRouter = Backbone.Router.extend({
     routes: {
+        'messages': 'messages',
         'profile/edit': 'profile',
         'article/editor/(:id)': 'editor',
         '*default': 'dashboard'
@@ -20,6 +21,11 @@ var adminRouter = Backbone.Router.extend({
 
     profile: function() {
         this.currentController = new ProfileController();
+    },
+
+    messages: function() {
+        this.currentController = new DashboardController();
+        this.currentController.showMessageList();
     }
 });
 
