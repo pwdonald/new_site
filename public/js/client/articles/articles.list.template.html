@@ -1,0 +1,15 @@
+<article id="articleList" class="listbox">
+	<div>{{models.length}} articles found</div>
+	{{#each models}}
+		<div class="boxTitle">
+			<span>{{modifiedDate}}</span>
+			<span>{{article.title}}</span>
+			<span>{{author}}</span>
+			{{#if article.published}}
+				<span>Published</span>
+			{{else}}
+				<span>Unpublished</span>
+			{{/if}}
+		</div>
+	{{/each}}
+</article>
