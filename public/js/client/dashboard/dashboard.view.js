@@ -2,6 +2,7 @@ var client = require('../adminclient'),
     _ = require('underscore'),
     BaseView = require('../base.view'),
     DashboardTemplate = require('./dashboard.template.html'),
+    ArticleItemView = require('./items/articles/articles.dashitem.view'),
     MessageItemView = require('./items/messages.dashitem.view');
 
 var DashboardView = BaseView.extend({
@@ -24,10 +25,18 @@ var DashboardView = BaseView.extend({
         this.on('render', function() {
             if (this.messageCollection) {
                 this.itemViews.push(new MessageItemView({
-                    el: $('#dashitems'),
+                    el: '#messageItem',
                     model: this.messageCollection
                 }));
             }
+
+            if (this.articleCollection) {
+                this.itemViews.push(new ArticleItemView({
+                    el: '#articleItem',
+                    model: this.articleCollection
+                }));
+            }
+
             _.each(this.itemViews, function(view) {
                 view.render();
             });
