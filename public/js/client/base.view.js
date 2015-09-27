@@ -10,10 +10,14 @@ var BaseView = Backbone.View.extend({
             _.each(this.collection.models, function(model) {
                 if (model.get('timestamp')) {
                     model.set('timestamp', new Date(model.get('timestamp')));
-                    var month = model.get('timestamp').getMonth() + 1;
-                    var date = model.get('timestamp').getDate();
-                    var year = model.get('timestamp').getFullYear();
+                    var timestamp = model.get('timestamp');
+                    var month = timestamp.getMonth() + 1;
+                    var date = timestamp.getDate();
+                    var year = timestamp.getFullYear();
+                    var hour = timestamp.getHours();
+                    var minutes = timestamp.getMinutes();
                     model.set('timestamp', month + '/' + date + '/' + year);
+                    model.set('timestampTime', hour + ':' + minutes);
                 }
             });
         }

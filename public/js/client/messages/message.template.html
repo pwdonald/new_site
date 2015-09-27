@@ -1,38 +1,52 @@
 <article id="messageList" class="listbox">
+	<div>{{models.length}} messages found</div>
 	{{#each models}}
 		<div class="boxTitle">
 		<i class="fa fa-caret-down"></i>
 			<span class="contactDate">
 				{{timestamp}}
 			</span>
-			<span class="contactName">
-				{{lastName}}, {{firstName}}
-			</span>
 			<span class="contactEmail">
 				{{email}}
 			</span>
 		</div>
 		<div class="boxExpanded">
-			<div class="fieldName">Date</div>
-			<div class="fieldValue">{{timestamp}}</div>
+			<div class="fieldItem">
+			<div class="fieldName">Timestamp</div>
+			<div class="fieldValue">{{timestamp}} at {{timestampTime}}</div>
+			</div>
 
+			<div class="fieldItem">
 			<div class="fieldName">First Name</div>
 			<div class="fieldValue">{{firstName}}</div>
+			</div>
 			
+			<div class="fieldItem">
 			<div class="fieldName">Last Name</div>
 			<div class="fieldValue">{{lastName}}</div>
+			</div>
 
+			<div class="fieldItem">
 			<div class="fieldName">Email</div>
 			<div class="fieldValue">{{email}}</div>
+			</div>
 
+			<div class="fieldItem">
 			<div class="fieldName">Day Phone</div>
 			<div class="fieldValue">{{dayPhone}}</div>
+			</div>
 
+			<div class="fieldItem">
 			<div class="fieldName">Evening Phone</div>
 			<div class="fieldValue">{{eveningPhone}}</div>
+			</div>
+
+			<div class="fieldItem">
 		
 			<div class="fieldName">Message</div>
 			<div class="fieldValue">{{message}}</div>
+
+			</div>
 		</div>
 	{{/each}}
 </article>
