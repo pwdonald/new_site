@@ -1,9 +1,43 @@
 <article id="editor" class="container">
-	<form>
-		<input type="text" placeholder="Article Name" id="articleName" name="articleName">
-		<textarea id="textedit" contentEditable="true"></textarea>
-		<div id="rendered">
+	<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a data-bypass="true" href="#editor-tab" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+	    <li role="presentation"><a data-bypass="true" href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Preview</a></li>
+  	</ul>
+  	 <div class="tab-content">
+    	<div role="tabpanel" class="tab-pane active" id="editor-tab">
+			<form>
+				<div class="fieldItem">
+					<label for="title" class="fieldName">Article Name</label>
+					<input value="{{title}}" type="text" class="fieldItem" placeholder="Article Name" id="title" name="title">
+				</div>
+				<div class="fieldItem">
+					<label for="tags" class="fieldName">Content Tags</label>
+					<input value="{{tags}}" type="text" class="fieldItem" placeholder="Content Tags (comma separated)" id="tags" name="tags">
+				</div>
+				<div class="fieldItem">
+					<label for="published" class="fieldName">Publish?</label>
+					<div class="radioValues">
+						{{#if published}}
+							<input type="radio" id="publishedSetting" name="publishedSetting" value="false">Unpublished
+							<input type="radio" id="publishedSetting" name="publishedSetting" value="true" checked="checked">Publish
+						{{else}}
+							<input type="radio" id="publishedSetting" name="publishedSetting" value="false" checked="checked">Unpublished
+							<input type="radio" id="publishedSetting" name="publishedSetting" value="true">Publish
+						{{/if}}
+					</div>
+				</div>
 
+				<div class="fieldItem">
+					<label for="content" class="fieldName">Article Content</label>
+					<textarea id="content" contentEditable="true">{{content}}</textarea>
+				</div>
+				<input type="submit" value="Save" class="btn btn-success" />
+			</form>
 		</div>
-	</form>
+    	<div role="tabpanel" class="tab-pane" id="preview">
+    		<div id="rendered">
+
+			</div>
+    	</div>
+    </div>
 </article>

@@ -1,10 +1,36 @@
-var Backbone = require('backbone'),
-    EditorView = require('./editor.view');
+var _ = require('underscore'),
+    Backbone = require('backbone'),
+    Router = require('../router'),
+    EditorView = require('./editor.view'),
+    ArticleModel = require('./article.model');
 
-var EditorController = function() {
-    this.view = new EditorView();
+var EditorController = function(options) {
+    _.extend(this, Backbone.Events);
+
+    var id = (options && options.id ? options.id : 0);
+
+    if (options.id) {
+        this.model = new ArticleModel({
+            id: id
+        });
+    } else {
+        this.model = new ArticleModel();
+    }
+
+    this.view = new EditorView({
+        model: this.model
+    });
+
+    this.listenTo(this.view, 'submit', function() {
+        this.model.save().done(function() {
+            Router.navigate('/dashboard');
+        }).fail(function() {
+            window.displayNotification('Failed to save! Please try again later.', 'alert-danger');
+        });
+    }, this);
 
     this.view.render();
+    this.model.fetch();
 };
 
 module.exports = EditorController;

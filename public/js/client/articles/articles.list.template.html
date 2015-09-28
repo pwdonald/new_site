@@ -2,9 +2,9 @@
 	<div>{{models.length}} articles found</div>
 	{{#each models}}
 		<div class="boxTitle">
-			<span>{{modifiedDate}}</span>
+			<span>{{date modifiedDate}}</span>
 			<span>{{article.title}}</span>
-			<span>{{author}}</span>
+			<span>{{author.username}}</span>
 			{{#if article.published}}
 				<span>Published</span>
 			{{else}}

@@ -57,6 +57,20 @@ exports.save = function(articleData, user, callback) {
         return callback(validationErrors);
     }
 
+    if (articleData.published) {
+        if (articleData.published === 'true') {
+            articleData.published = true;
+        } else {
+            articleData.published = false;
+        }
+    } else {
+        articleData.published = false;
+    }
+
+    articleData._id = articleData.id;
+
+    delete articleData.id;
+
     if (articleData._id) {
         // update model
 
@@ -72,15 +86,13 @@ exports.save = function(articleData, user, callback) {
 
     } else {
         // save new model
+        articleData.createDate = new Date();
+        articleData.author = user;
+        articleData.modifiedDate = new Date();
+        articleData.revision = 0;
+        articleData.deleted = false;
 
-        Article.insert({
-            article: articleData.article,
-            createDate: new Date(),
-            author: user,
-            modifiedDate: new Date(),
-            revision: 0,
-            deleted: false
-        }, callback);
+        Article.insert(articleData, callback);
 
     }
 };

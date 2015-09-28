@@ -3,8 +3,12 @@ var _ = require('underscore'),
     Handlebars = require('handlebars'),
     AdminClient = require('./adminclient');
 
-var BaseView = Backbone.View.extend({
+Handlebars.registerHelper('date', function(options) {
+    var date = new Date(options);
+    return date.toLocaleDateString();
+});
 
+var BaseView = Backbone.View.extend({
     render: function() {
         if (this.collection) {
             _.each(this.collection.models, function(model) {

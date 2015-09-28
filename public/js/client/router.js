@@ -13,7 +13,9 @@ var adminRouter = Backbone.Router.extend({
     },
 
     editor: function(id) {
-        this.currentController = new EditorController(id);
+        this.currentController = new EditorController({
+            id: id
+        });
     },
 
     dashboard: function() {

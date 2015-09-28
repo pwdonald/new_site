@@ -47,6 +47,10 @@ module.exports = function() {
 
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
+            if (user && user.password) {
+                delete user.password;
+            }
+
             done(err, user);
         });
     });
