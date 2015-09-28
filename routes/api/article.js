@@ -3,20 +3,6 @@ var express = require('express'),
     ArticleModel = require('../../models/articlemodel'),
     router = express.Router();
 
-router.post('/article', isAuthorized, function(req, res) {
-    var savingUser = {
-        _id: req.user._id,
-        username: req.user.username
-    };
-    ArticleModel.save(req.body, savingUser, function(err, article) {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.status(201).json(article);
-    });
-});
-
 router.put('/article/:id', isAuthorized, function(req, res) {
     var id = req.params.id;
 
@@ -35,6 +21,20 @@ router.put('/article/:id', isAuthorized, function(req, res) {
         }
 
         res.status(204).json(article);
+    });
+});
+
+router.post('/article', isAuthorized, function(req, res) {
+    var savingUser = {
+        _id: req.user._id,
+        username: req.user.username
+    };
+    ArticleModel.save(req.body, savingUser, function(err, article) {
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        res.status(201).json(article);
     });
 });
 

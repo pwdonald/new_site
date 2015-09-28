@@ -3,7 +3,9 @@ var express = require('express'),
     router = express.Router();
 
 router.get('/*', isLoggedIn, function(req, res) {
-    res.render('admin');
+    res.render('admin', {
+        asideHide: true
+    });
 });
 
 module.exports = router;

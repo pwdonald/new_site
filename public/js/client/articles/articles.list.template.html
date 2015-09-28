@@ -1,15 +1,44 @@
 <article id="articleList" class="listbox">
 	<div>{{models.length}} articles found</div>
-	{{#each models}}
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Article Title</th>
+				<th>Last Modified</th>
+				<th>Author</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each models}}
+			<tr>
+				<td><a class="btn btn-small" href="/admin/article/editor/{{_id}}"><i class="fa fa-file-text-o"></i> Edit</a></td>
+				<td>{{title}}</td>
+				<td>{{date modifiedDate}}</td>
+				<td>{{author.username}}</td>
+				{{#if published}}
+					<td>Published</td>
+				{{else}}
+					<td>Unpublished</td>
+				{{/if}}				
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+<!-- 	{{#each models}}
 		<div class="boxTitle">
+			<i class="fa fa-file-text-o"></i>
+			<a href="/admin/article/editor/{{_id}}">
 			<span>{{date modifiedDate}}</span>
-			<span>{{article.title}}</span>
+			<span>{{title}}</span>
 			<span>{{author.username}}</span>
-			{{#if article.published}}
+			{{#if published}}
 				<span>Published</span>
 			{{else}}
 				<span>Unpublished</span>
 			{{/if}}
+			</a>
 		</div>
-	{{/each}}
+	{{/each}} -->
 </article>

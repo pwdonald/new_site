@@ -1,9 +1,51 @@
 #articleList {
+	width: 100%;
+	table {
+		border-top: 1px solid @secondaryBackground;
+		border-bottom: 1px solid @secondaryBackground;
+
+		th {
+			font-weight: bolder;
+		}
+		tr {
+			margin-bottom: 1em;
+		}
+
+		tbody tr:nth-child(odd) {
+			background-color: @secondaryBackground;
+		}
+		font-weight: lighter;
+		margin-top: 2em;
+		padding: .25em;
+		width: 100%;
+		td:first-child, th:first-child {
+			padding-right: 1em;
+		}
+	}
 	.boxTitle {
+		a {
+			text-decoration: none;
+			color: black;
+		}
+
+		a:hover {
+			color: @secondaryBackground;
+		}
+
+		span {
+			margin-right: 1.5em;
+		}
+
 		padding: 0;
+		padding-bottom: .25em;
+		border-bottom: 1px solid @secondaryBackground;
 	}
 	.boxTitle:hover {
 		color: #aaa;
+	}
+
+	.boxTitle:last-child {
+		border-bottom: 0;
 	}
 }
 

@@ -23,7 +23,10 @@ var EditorController = function(options) {
 
     this.listenTo(this.view, 'submit', function() {
         this.model.save().done(function() {
-            Router.navigate('/dashboard');
+            Backbone.history.navigate('/articles', {
+                trigger: true
+            });
+            window.displayNotification('Article saved!', 'alert-success');
         }).fail(function() {
             window.displayNotification('Failed to save! Please try again later.', 'alert-danger');
         });

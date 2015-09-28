@@ -5,10 +5,20 @@ var _ = require('underscore'),
 
 Handlebars.registerHelper('date', function(options) {
     var date = new Date(options);
+    var now = new Date();
+
+    if (date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear()) {
+        return 'Today at ' + date.toLocaleTimeString();
+    }
     return date.toLocaleDateString();
 });
 
 var BaseView = Backbone.View.extend({
+    breadCrumbs: [{
+        name: 'Dashboard',
+        location: '/admin/dashboard'
+    }],
+
     render: function() {
         if (this.collection) {
             _.each(this.collection.models, function(model) {
@@ -40,12 +50,26 @@ var BaseView = Backbone.View.extend({
         }
 
         this.trigger('render');
+        this.updateBreadCrumbs();
         this.linkListener();
 
         // TODO: move this to a higher abstraction
         AdminClient.updateSubHeader(this.title, this.mainIcon);
 
         return this;
+    },
+
+    updateBreadCrumbs: function() {
+        var breadCrumbsList = $('.breadcrumb');
+
+        if (this.breadCrumbs) {
+            breadCrumbsList.empty();
+            _.each(this.breadCrumbs, function(crumb) {
+                var a = $('<a>').attr('href', crumb.location).html(crumb.name);
+                var li = $('<li>').append(a);
+                breadCrumbsList.append(li);
+            });
+        }
     },
 
     linkListener: function() {
