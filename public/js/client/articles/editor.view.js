@@ -21,6 +21,7 @@ var EditorView = BaseView.extend({
             this.$('#title').on('input', this.compile);
             this.$('#content').on('input', this.compile);
             this.$('form').on('submit', this.submit.bind(this));
+            this.compile();
         }, this);
     },
 
