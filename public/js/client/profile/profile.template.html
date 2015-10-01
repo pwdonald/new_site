@@ -1,10 +1,15 @@
 <article class="page">
     <form>
         <h2>User Profile</h2>
-        <div>
+        <div class="row">
+        <div class="col-sm-6">
             <h3>Name</h3>
             <input value="{{fullName}}" type="text" name="fullName" placeholder="Full Name" id="fullName" required autofocus/>
+        </div>
+        <div class="col-sm-6">
+            <h3>Alias</h3>
             <input value="{{alias}}" type="text" name="alias" placeholder="Display Name" id="alias"/>
+        </div>
         </div>
         <div>
             <h3>Public Email</h3>
