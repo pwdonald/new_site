@@ -17,7 +17,7 @@ router.put('/article/:id', isAuthorized, function(req, res) {
 
     ArticleModel.save(req.body, savingUser, function(err, article) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(500).send(err);
         }
 
         res.status(204).json(article);
@@ -31,7 +31,7 @@ router.post('/article', isAuthorized, function(req, res) {
     };
     ArticleModel.save(req.body, savingUser, function(err, article) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(500).send(err);
         }
 
         res.status(201).json(article);
@@ -41,7 +41,7 @@ router.post('/article', isAuthorized, function(req, res) {
 router.get('/article', isAuthorized, function(req, res) {
     ArticleModel.find({}, function(err, articles) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(500).send(err);
         }
 
         res.status(200).json(articles);
@@ -55,7 +55,7 @@ router.get('/article/:id', isAuthorized, function(req, res) {
         _id: id
     }, function(err, articles) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(500).send(err);
         }
 
         res.status(200).json(articles[0]);
@@ -70,14 +70,14 @@ router.delete('/article/:id', isAuthorized, function(req, res) {
     var id = req.params.id;
     ArticleModel.get(id, function(err, article) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(500).send(err);
         }
 
         article.deleted = true;
 
         ArticleModel.save(article, savingUser, function(err, article) {
             if (err) {
-                return res.status(500).json(err);
+                return res.status(500).send(err);
             }
 
             res.status(200);

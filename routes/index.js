@@ -15,7 +15,18 @@ router.use(function(req, res, next) {
     res.locals.user = req.user;
     res.locals.role = (req.user ? req.user.role : 0);
     res.locals.path = req.path;
-    next();
+    Article.getMostRecent(true, function(err, articles) {
+        if (err) {
+            console.log('Failed to load recent articles for sidebar: ' + err);
+            return next();
+        }
+
+        if (articles) {
+            res.locals.articles = articles;
+        }
+
+        next();
+    });
 });
 
 router.get('/login', alreadyLoggedIn, function(req, res) {
@@ -42,19 +53,14 @@ router.get('/register', alreadyLoggedIn, function(req, res) {
 });
 
 router.get('/article/:articleTitle', function(req, res, next) {
-    var title = req.params.articleTitle.replace('-', ' '),
-        titleRegex = new RegExp('^' + title + '$', 'i');
+    var title = req.params.articleTitle.replace('-', ' ');
 
-    Article.find({
-        "title": {
-            $regex: titleRegex
-        }
-    }, function(err, articles) {
+    Article.getByTitle(title, function(err, articles) {
         if (err) {
             return next(err);
         }
 
-        if (!articles && !articles[0]) {
+        if (!articles || !articles[0]) {
             return next();
         }
 
@@ -91,22 +97,30 @@ router.get('/blog', function(req, res, next) {
 
         var count = articles.length;
 
-        articles.forEach(function(article) {
-            User.findById(article.author._id, function(err, user) {
-                article.author.profile = user.profile;
+        if (count > 0) {
+            articles.forEach(function(article) {
+                User.findById(article.author._id, function(err, user) {
+                    article.author.profile = user.profile;
 
-                count--;
+                    count--;
 
-                if (count <= 0) {
-                    res.render('index', {
-                        pageName: 'blog',
-                        pageIcon: 'rss',
-                        articles: articles
-                    });
-                }
+                    if (count <= 0) {
+                        res.render('index', {
+                            pageName: 'blog',
+                            pageIcon: 'rss',
+                            articles: articles
+                        });
+                    }
+                });
+                article.intro = article.content.substring(0, 400) + '...';
             });
-            article.intro = article.content.substring(0, 400) + '...';
-        });
+        } else {
+            res.render('index', {
+                pageName: 'blog',
+                pageIcon: 'rss',
+                articles: articles
+            });
+        }
     });
 });
 

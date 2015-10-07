@@ -1,4 +1,5 @@
 <article>
+    {{#if articles.length}}
     {{#each articles}}
     <header class="blog-list">
         {{> sharebutton}}
@@ -7,4 +8,7 @@
         <a href="/article/{{formatTitle title}}" class="btn">Read More</a>
     </header>
     {{/each}}
+    {{else}}
+    <h3>Nothing posted, check back later!</h3>
+    {{/if}}
 </article>

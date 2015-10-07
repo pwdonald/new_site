@@ -1,14 +1,20 @@
 <div class="article-footer clearfix">
+    {{#if interestingEnabled}}
     <p class="interesting">Did you find this article interesting?
     <div id="btns">
-    <a href="#yes" title="Yes" class="btn btn-success"><i class="fa fa-thumbs-up"></i></a>
-    <a href="#no" title="No" class="btn btn-failure"><i class="fa fa-thumbs-down"></i></a>
+        <a href="/api/vote/{{article._id}}/yes" title="Yes" class="btn btn-success"><i class="fa fa-thumbs-up"></i></a>
+        <a href="/api/vote/{{article._id}}/no" title="No" class="btn btn-failure"><i class="fa fa-thumbs-down"></i></a>
     </div>
     </p>
+    {{/if}}
+    {{#if prevArticle}}
     <span class="previous">
-        <a href="#" title="Previous"><i class="fa fa-arrow-circle-left"></i> Previous</a>
+        <a href="/article/{{formatTitle prevArticle.title}}" title="Previous"><i class="fa fa-arrow-circle-left"></i> Previous</a>
     </span>
+    {{/if}}
+    {{#if nextArticle}}
     <span class="next">
-         <a href="#" title="Next">Next <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="/article/{{formatTitle nextArticle.title}}" title="Next">Next <i class="fa fa-arrow-circle-right"></i></a>
     </span>
+    {{/if}}
 </div>

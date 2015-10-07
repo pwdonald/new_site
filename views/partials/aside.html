@@ -10,8 +10,13 @@
     </form>
     <h3>Recent Posts</h3>
     <ul>
-        <li><small>01/01/16</small> <a href="#">A new post will appear here.</a></li>
-        <li><small>01/01/16</small> <a href="#">A new post will appear here.</a></li>
+        {{#if articles.length}}
+        {{#each articles}}
+        <li><small>{{date publishDate}}</small><a href="/article/{{formatTitle title}}">{{title}}</a></li>
+        {{/each}}
+        {{else}}
+        <li><small>No recent posts.</small></li>
+        {{/if}}
     </ul>
     {{#if user}}
         <section id="user-info">

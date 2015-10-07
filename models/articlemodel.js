@@ -16,7 +16,7 @@ var requiredFields = [
 
 var validate = function(articleData) {
     var errors = [];
-    var article = articleData.article;
+    var article = articleData;
 
     if (article && article.published) {
         _.each(requiredFields, function(field) {
@@ -30,6 +30,34 @@ var validate = function(articleData) {
     }
 
     return errors;
+};
+
+var retrieveWithinDates = function(start, end, term, maxResults) {
+    var startDate = new Date(start),
+        endDate = new Date(end),
+        maximumResults = maxResults || 5;
+
+    var query = {
+        "publishDate": {
+            "$gte": startDate.toJSON(),
+            "$lte": endDate.toJSON()
+        },
+        published: true,
+        deleted: false
+    };
+
+    if (term && term !== '') {
+        query.term = term;
+    }
+
+    return Article.find({
+        publishDate: {
+            $gte: startDate,
+            $lte: endDate
+        }
+    }).sort({
+        publishDate: -1
+    }).limit(maximumResults);
 };
 
 var retrieveMostRecent = function(arePublished, recentCount) {
@@ -52,10 +80,93 @@ var retrieveMostRecent = function(arePublished, recentCount) {
     }).limit(count);
 };
 
+var findPreviousArticle = function(article, callback) {
+    if (!article) {
+        return callback('No article specified!');
+    }
+
+    retrieveWithinDates('01/01/2000', article.publishDate, undefined, 1).exec(function(err, articles) {
+        if (err) {
+            callback(err);
+        }
+
+        callback(null, articles[0]);
+    });
+};
+
+var findNextArticle = function(article, callback) {
+    if (!article) {
+        return callback('No article specified!');
+    }
+
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    retrieveWithinDates(article.publishDate, tomorrow.toLocaleDateString(), undefined, 1).exec(function(err, articles) {
+        if (err) {
+            callback(err);
+        }
+
+        callback(undefined, articles[0]);
+    });
+};
+
 exports.getMostRecent = function(arePublished, callback, recentCount) {
     var articleFetch = retrieveMostRecent(arePublished, recentCount);
 
     articleFetch.exec(callback);
+};
+
+exports.getByTitle = function(title, callback) {
+    var titleRegex = new RegExp('^' + title + '$', 'i');
+
+    Article.find({
+        "title": {
+            $regex: titleRegex
+        }
+    }, function(err, articles) {
+        if (err) {
+            return callback(err);
+        }
+
+        if (!articles || !articles[0]) {
+            return callback(undefined, []);
+        }
+
+        var count = articles.length;
+
+        articles.forEach(function(article) {
+            findPreviousArticle(article, function(err, previousArticle) {
+                if (err) {
+                    console.log('failed to find previous article');
+                }
+
+                if (previousArticle) {
+                    if (article._id !== previousArticle._id) {
+                        article.prevArticle = previousArticle;
+                    }
+                }
+
+                findNextArticle(article, function(err, nextArticle) {
+                    if (err) {
+                        console.log('failed to find next article');
+                    }
+
+                    if (nextArticle) {
+                        if (article._id !== nextArticle._id) {
+                            article.nextArticle = nextArticle;
+                        }
+                    }
+
+                    count--;
+
+                    if (count <= 0) {
+                        callback(undefined, articles);
+                    }
+                });
+            });
+        });
+    });
 };
 
 exports.find = function(query, callback) {
@@ -88,6 +199,7 @@ exports.save = function(articleData, user, callback) {
     if (articleData.published) {
         if (articleData.published === 'true') {
             articleData.published = true;
+            articleData.publishDate = new Date(articleData.publishDate);
         } else {
             articleData.published = false;
         }
