@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    User = require('../models/usermodel');
+    User = require('../models/usermodel'),
+    Article = require('../models/articlemodel');
 
 var alreadyLoggedIn = function(req, res, next) {
     if (req.user && req.isAuthenticated()) {
@@ -40,15 +41,72 @@ router.get('/register', alreadyLoggedIn, function(req, res) {
     });
 });
 
+router.get('/article/:articleTitle', function(req, res, next) {
+    var title = req.params.articleTitle.replace('-', ' '),
+        titleRegex = new RegExp('^' + title + '$', 'i');
+
+    Article.find({
+        "title": {
+            $regex: titleRegex
+        }
+    }, function(err, articles) {
+        if (err) {
+            return next(err);
+        }
+
+        if (!articles && !articles[0]) {
+            return next();
+        }
+
+        User.findById(articles[0].author._id, function(err, authorUser) {
+            if (err) {
+                return next(err);
+            }
+
+            if (!authorUser) {
+                return next();
+            }
+
+            articles[0].author.profile = authorUser.profile;
+
+            res.render('article', {
+                article: articles[0],
+                pageIcon: 'file-text',
+                pageName: articles[0].title
+            });
+        });
+    });
+});
+
 /* GET home page. */
 router.get('/', function(req, res) {
     res.redirect('/blog');
 });
 
-router.get('/blog', function(req, res) {
-    res.render('index', {
-        pageName: 'blog',
-        pageIcon: 'rss'
+router.get('/blog', function(req, res, next) {
+    Article.getMostRecent(true, function(err, articles) {
+        if (err) {
+            return next(err);
+        }
+
+        var count = articles.length;
+
+        articles.forEach(function(article) {
+            User.findById(article.author._id, function(err, user) {
+                article.author.profile = user.profile;
+
+                count--;
+
+                if (count <= 0) {
+                    res.render('index', {
+                        pageName: 'blog',
+                        pageIcon: 'rss',
+                        articles: articles
+                    });
+                }
+            });
+            article.intro = article.content.substring(0, 400) + '...';
+        });
     });
 });
 

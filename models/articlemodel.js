@@ -32,6 +32,32 @@ var validate = function(articleData) {
     return errors;
 };
 
+var retrieveMostRecent = function(arePublished, recentCount) {
+    var count = recentCount || 5;
+    if (arePublished) {
+        return Article.find({
+            deleted: false,
+            published: arePublished
+        }).sort({
+            publishDate: -1
+        }).limit(count);
+    }
+
+    return Article.find({
+        deleted: false
+    }).sort({
+        publishDate: -1,
+        createDate: -1,
+        modifiedDate: -1
+    }).limit(count);
+};
+
+exports.getMostRecent = function(arePublished, callback, recentCount) {
+    var articleFetch = retrieveMostRecent(arePublished, recentCount);
+
+    articleFetch.exec(callback);
+};
+
 exports.find = function(query, callback) {
     query.deleted = false;
     Article.find(query, callback);
@@ -52,6 +78,8 @@ exports.hardDelete = function(id, callback) {
 
 exports.save = function(articleData, user, callback) {
     var validationErrors = validate(articleData);
+
+    articleData.tags = articleData.tags.split(',');
 
     if (validationErrors && validationErrors.length > 0) {
         return callback(validationErrors);

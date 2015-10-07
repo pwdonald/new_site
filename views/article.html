@@ -1,0 +1,29 @@
+{{#with article}}
+<article>
+    <header>
+        {{> sharebutton}}
+        {{#if published}} 
+            <h1>{{title}}<small>{{date publishDate}}</small></h1>
+        {{else}}
+            <h1>{{title}}<small>{{date modifiedDate}}</small></h1>
+        {{/if}}
+        <p class="tags">
+            {{#each tags}}
+                <a href="#tag">{{this}}</a>
+            {{/each}}
+        </p>
+    </header>
+    {{content}}
+    <div class="author-info">
+        <p class="author">Author:</p>
+        <a href="/profile/{{author.profile.alias}}" title="Contact {{author.profile.alias}}">
+            {{#if author.profile.avatarUrl}}
+            <span class="author-pic" title="{{author.profile.alias}} Profile Pic" style="background-image: url('{{author.profile.avatarUrl}}');"></span>
+            {{else}}
+            <i class="fa fa-user"></i>
+            {{/if}}
+            <span>{{author.profile.fullName}}</span></a>
+    </div>
+    {{> articlefooter}}
+</article>
+{{/with}}
