@@ -3,9 +3,9 @@
     {{#each articles}}
     <header class="blog-list">
         {{> sharebutton}}
-        <h1><a href="/article/{{formatTitle title}}" title="read">{{title}}</a><small>{{date publishDate}} by <a href="/profile/{{author.profile.alias}}" title="{{author.profile.alias}} Profile" >{{author.profile.fullName}}</a></small></h1>
+        <h1><a href="/article/{{formatTitleDate publishDate}}/{{formatTitle title}}" title="read">{{title}}</a><small>{{date publishDate}} by <a href="/profile/{{author.profile.alias}}" title="{{author.profile.alias}} Profile" >{{author.profile.fullName}}</a></small></h1>
         <p>{{intro}}</p>
-        <a href="/article/{{formatTitle title}}" class="btn">Read More</a>
+        <a href="/article/{{formatTitleDate publishDate}}/{{formatTitle title}}" class="btn">Read More</a>
     </header>
     {{/each}}
     {{else}}

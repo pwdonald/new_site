@@ -52,10 +52,13 @@ router.get('/register', alreadyLoggedIn, function(req, res) {
     });
 });
 
-router.get('/article/:articleTitle', function(req, res, next) {
-    var title = req.params.articleTitle.replace('-', ' ');
+router.get('/article/:month/:day/:year/:articleTitle', function(req, res, next) {
+    var title = req.params.articleTitle.replace(/-/g, ' '),
+        date = req.params.month + '/' + req.params.day + '/' + req.params.year;
 
-    Article.getByTitle(title, function(err, articles) {
+    date = new Date(date);
+
+    Article.getByTitleDate(title, date, function(err, articles) {
         if (err) {
             return next(err);
         }

@@ -21,6 +21,14 @@ var EditorController = function(options) {
         model: this.model
     });
 
+    this.listenTo(this.model, 'sync', function() {
+        if (this.model.get(publishDate)) {
+            var publishDate = new Date(publishDate);
+            this.model.set(publishDate, publishDate.toLocaleDateString());
+            this.render();
+        }
+    }.bind(this));
+
     this.listenTo(this.view, 'submit', function() {
         this.model.save().done(function() {
             Backbone.history.navigate('/articles', {

@@ -109,13 +109,14 @@ exports.getMostRecent = function(arePublished, callback, recentCount) {
     articleFetch.exec(callback);
 };
 
-exports.getByTitle = function(title, callback) {
+exports.getByTitleDate = function(title, date, callback) {
     var titleRegex = new RegExp('^' + title + '$', 'i');
 
     Article.find({
         "title": {
             $regex: titleRegex
-        }
+        },
+        publishDate: date
     }, function(err, articles) {
         if (err) {
             return callback(err);
@@ -184,7 +185,7 @@ exports.save = function(articleData, user, callback) {
 
     articleData.tags = articleData.tags.split(',');
 
-    for(var i=0; i < articleData.tags.length; i++) {
+    for (var i = 0; i < articleData.tags.length; i++) {
         articleData.tags[i] = articleData.tags[i].trim();
     }
 
@@ -207,6 +208,8 @@ exports.save = function(articleData, user, callback) {
 
     delete articleData.id;
 
+    var titleRegex = new RegExp('^' + articleData.title + '?.$', 'i');
+
     if (articleData._id) {
         // update model
 
@@ -219,7 +222,6 @@ exports.save = function(articleData, user, callback) {
         }, articleData, function(err) {
             callback(err, articleData);
         });
-
     } else {
         // save new model
         articleData.createDate = new Date();
@@ -229,6 +231,5 @@ exports.save = function(articleData, user, callback) {
         articleData.deleted = false;
 
         Article.insert(articleData, callback);
-
     }
 };

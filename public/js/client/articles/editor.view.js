@@ -13,9 +13,20 @@ var EditorView = BaseView.extend({
     tagName: 'div',
     template: EditorTemplate,
 
+    preRender: function() {
+        var publishDate = this.model.get('publishDate');
+
+        if (publishDate) {
+            var date = new Date(publishDate);
+            this.model.set('publishDate', date.toLocaleDateString());
+        }
+
+        this.render();
+    },
+
     initialize: function() {
         if (this.model) {
-            this.listenTo(this.model, 'sync', this.render);
+            this.listenTo(this.model, 'sync', this.preRender);
         }
         this.on('render', function() {
             this.$('#title').on('input', this.compile);
