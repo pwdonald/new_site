@@ -32,28 +32,20 @@ var validate = function(articleData) {
     return errors;
 };
 
-var retrieveWithinDates = function(start, end, term, maxResults) {
+var retrieveWithinDates = function(start, end, exclusionId, maxResults) {
     var startDate = new Date(start),
         endDate = new Date(end),
         maximumResults = maxResults || 5;
-
-    var query = {
-        "publishDate": {
-            "$gte": startDate.toJSON(),
-            "$lte": endDate.toJSON()
-        },
-        published: true,
-        deleted: false
-    };
-
-    if (term && term !== '') {
-        query.term = term;
-    }
 
     return Article.find({
         publishDate: {
             $gte: startDate,
             $lte: endDate
+        },
+        published: true,
+        deleted: false,
+        _id: {
+            $nin: [exclusionId]
         }
     }).sort({
         publishDate: -1
@@ -85,7 +77,7 @@ var findPreviousArticle = function(article, callback) {
         return callback('No article specified!');
     }
 
-    retrieveWithinDates('01/01/2000', article.publishDate, undefined, 1).exec(function(err, articles) {
+    retrieveWithinDates('01/01/2000', article.publishDate, article._id, 1).exec(function(err, articles) {
         if (err) {
             callback(err);
         }
@@ -102,7 +94,7 @@ var findNextArticle = function(article, callback) {
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    retrieveWithinDates(article.publishDate, tomorrow.toLocaleDateString(), undefined, 1).exec(function(err, articles) {
+    retrieveWithinDates(article.publishDate, tomorrow.toLocaleDateString(), article._id, 1).exec(function(err, articles) {
         if (err) {
             callback(err);
         }
@@ -191,6 +183,10 @@ exports.save = function(articleData, user, callback) {
     var validationErrors = validate(articleData);
 
     articleData.tags = articleData.tags.split(',');
+
+    for(var i=0; i < articleData.tags.length; i++) {
+        articleData.tags[i] = articleData.tags[i].trim();
+    }
 
     if (validationErrors && validationErrors.length > 0) {
         return callback(validationErrors);

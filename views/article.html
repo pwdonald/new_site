@@ -7,9 +7,9 @@
         {{else}}
             <h1>{{title}}<small>{{date modifiedDate}}</small></h1>
         {{/if}}
-        <p class="tags">
+        <p class="tags"><small>In this article:</small> 
             {{#each tags}}
-                <a href="#tag">{{this}}</a>
+            <a href="/search/tag/{{this}}" title="{{this}}">{{this}}</a>
             {{/each}}
         </p>
     </header>
