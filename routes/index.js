@@ -127,6 +127,23 @@ router.get('/blog', function(req, res, next) {
     });
 });
 
+router.get('/search/tag/:tag', function(req, res) {
+    var tag = req.params.tag;
+
+    Article.searchByTag(tag, function(err, articles) {
+        if (err) {
+            return next(err);
+        }
+
+        res.render('articleresults', {
+            pageIcon: 'search',
+            pageName: 'results for ' + tag,
+            articles: articles,
+            searchTag: tag
+        });
+    });
+});
+
 router.get('/projects', function(req, res) {
     res.render('index', {
         pageName: 'projects',

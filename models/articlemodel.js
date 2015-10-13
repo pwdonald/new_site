@@ -6,6 +6,11 @@ var Article = new Datastore({
     autoload: true
 });
 
+var defaultQuery = {
+    deleted: false,
+    published: true
+};
+
 var requiredFields = [
     'title',
     'publishDate',
@@ -159,6 +164,21 @@ exports.getByTitleDate = function(title, date, callback) {
                 });
             });
         });
+    });
+};
+
+exports.searchByTag = function(tag, callback) {
+    var query = _.clone(defaultQuery);
+    query.tags = {
+        $regex: new RegExp(tag, 'gi')
+    };
+
+    Article.find(query, function(err, articles) {
+        if (err) {
+            return callback(err);
+        }
+
+        callback(null, articles);
     });
 };
 

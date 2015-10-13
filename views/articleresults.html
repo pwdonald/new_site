@@ -1,0 +1,11 @@
+<article>
+    {{#if articles.length}}
+    <h3>{{articles.length}} articles related to {{searchTag}}</h3>
+    {{#each articles}}
+    <p><a href="/article/{{formatTitleDate publishDate}}/{{formatTitle title}}" title="read">{{title}}</a><small>{{date publishDate}} by <a href="/profile/{{author.profile.alias}}" title="{{author.profile.alias}} Profile" >{{author.profile.fullName}}</a></small></p>
+    {{/each}}
+    {{else}}
+    <h3>No articles found related to {{searchTag}}</h3>
+    {{/if}}
+</article>
+
