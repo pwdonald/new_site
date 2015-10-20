@@ -8,6 +8,11 @@ $(document).ready(function() {
     notifications = $('#notifications');
 
     notifications.hide();
+
+    $('#shareModal').on('shown.bs.modal', function() {
+        $('#twitterShare').html('<a href="https://twitter.com/share" class="twitter-share-button" data-via="donaldrjonesjr" data-size="large" data-related="donaldrjonesjr" data-count="none" data-hashtags="developer">Tweet</a>');
+        twttr.widgets.load();
+    });
 });
 
 window.displayNotification = function(message, alertType) {

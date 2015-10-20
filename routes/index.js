@@ -15,6 +15,7 @@ router.use(function(req, res, next) {
     res.locals.user = req.user;
     res.locals.role = (req.user ? req.user.role : 0);
     res.locals.path = req.path;
+    
     Article.getMostRecent(true, function(err, articles) {
         if (err) {
             console.log('Failed to load recent articles for sidebar: ' + err);
@@ -22,7 +23,7 @@ router.use(function(req, res, next) {
         }
 
         if (articles) {
-            res.locals.articles = articles;
+            res.locals.recentArticles = articles;
         }
 
         next();
@@ -52,7 +53,55 @@ router.get('/register', alreadyLoggedIn, function(req, res) {
     });
 });
 
-router.get('/article/:month/:day/:year/:articleTitle', function(req, res, next) {
+router.get('/article/search', function(req, res, next) {
+    if (!req.query || !req.query.search) {
+        return next();
+    }
+
+    res.redirect('/article/search/' + req.query.search);
+});
+
+router.get('/article/search/:term', function(req, res, next) {
+    var term = req.params.term;
+
+    Article.fuzzySearch(term, function(err, articles) {
+        if (err) {
+            return next(err);
+        }
+
+        var count = articles.length;
+
+        if (count > 0) {
+            articles.forEach(function(article) {
+                User.findById(article.author._id, function(err, user) {
+                    article.author.profile = user.profile;
+
+                    count--;
+
+                    if (count <= 0) {
+                        res.render('articleresults', {
+                            pageIcon: 'search',
+                            pageName: 'results for ' + term,
+                            articles: articles,
+                            searchTag: term
+                        });
+                    }
+                });
+                article.intro = article.content.substring(0, 400) + '...';
+            });
+        } else {
+            res.render('articleresults', {
+                pageIcon: 'search',
+                pageName: 'results for ' + term,
+                articles: articles,
+                searchTag: term
+            });
+        }
+
+    });
+});
+
+router.get('/article/:year/:month/:day/:articleTitle', function(req, res, next) {
     var title = req.params.articleTitle.replace(/-/g, ' '),
         date = req.params.month + '/' + req.params.day + '/' + req.params.year;
 
@@ -77,6 +126,7 @@ router.get('/article/:month/:day/:year/:articleTitle', function(req, res, next) 
             }
 
             articles[0].author.profile = authorUser.profile;
+            articles[0].url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
             res.render('article', {
                 article: articles[0],
@@ -102,6 +152,8 @@ router.get('/blog', function(req, res, next) {
 
         if (count > 0) {
             articles.forEach(function(article) {
+                article.url = req.protocol + '://' + req.get('host') + req.originalUrl;
+
                 User.findById(article.author._id, function(err, user) {
                     article.author.profile = user.profile;
 
