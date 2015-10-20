@@ -182,8 +182,38 @@ exports.searchByTag = function(tag, callback) {
     });
 };
 
+exports.fuzzySearch = function(searchTerm, callback) {
+    var query = {
+        $or: [{
+            tags: {
+                $regex: new RegExp(searchTerm, 'gi')
+            }
+        }, {
+            title: {
+                $regex: new RegExp(searchTerm, 'gi')
+            }
+        }, {
+            content: {
+                $regex: new RegExp(searchTerm, 'gi')
+            }
+        }]
+    };
+
+    _.extend(query, defaultQuery);
+
+    Article.find(query, function(err, articles) {
+        if (err) {
+            return callback(err);
+        }
+
+        _.uniq(articles);
+
+        callback(null, articles);
+    });
+};
+
 exports.find = function(query, callback) {
-    query.deleted = false;
+    _.extend(query, defaultQuery);
     Article.find(query, callback);
 };
 
