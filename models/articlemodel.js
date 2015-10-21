@@ -213,8 +213,7 @@ exports.fuzzySearch = function(searchTerm, callback) {
 };
 
 exports.find = function(query, callback) {
-    _.extend(query, defaultQuery);
-    Article.find(query, callback);
+    Article.find({}, callback);
 };
 
 exports.get = function(id, callback) {
