@@ -4,7 +4,8 @@ var client = require('../adminclient'),
     DashboardTemplate = require('./dashboard.template.html'),
     ArticleItemView = require('./items/articles/articles.dashitem.view'),
     MessageItemView = require('./items/messages.dashitem.view'),
-    ProfileItemView = require('./items/profile.dashitem.view');
+    ProfileItemView = require('./items/profile.dashitem.view'),
+    SettingsItemView = require('./items/settings.dashitem.view');
 
 var DashboardView = BaseView.extend({
     el: '#admin',
@@ -40,6 +41,11 @@ var DashboardView = BaseView.extend({
 
             this.itemViews.push(new ProfileItemView({
                 el: '#profileItem'
+            }));
+
+
+            this.itemViews.push(new SettingsItemView({
+                el: '#settingsItem'
             }));
 
             _.each(this.itemViews, function(view) {

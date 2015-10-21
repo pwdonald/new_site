@@ -2,7 +2,8 @@ var _ = require('underscore'),
     Backbone = require('backbone'),
     Router = require('../router'),
     EditorView = require('./editor.view'),
-    ArticleModel = require('./article.model');
+    ArticleModel = require('./article.model'),
+    AdminClient = require('../adminclient');
 
 var EditorController = function(options) {
     _.extend(this, Backbone.Events);
@@ -39,6 +40,11 @@ var EditorController = function(options) {
             window.displayNotification('Failed to save! Please try again later.', 'alert-danger');
         });
     }, this);
+
+    AdminClient.breadCrumbs[2] = {
+        name: 'Editor',
+        location: '/admin/article/editor/' + this.model.id
+    };
 
     this.view.render();
     this.model.fetch();

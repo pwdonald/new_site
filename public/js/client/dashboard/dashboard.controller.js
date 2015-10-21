@@ -3,7 +3,8 @@ var Backbone = require('backbone'),
     MessageListView = require('../messages/message.view'),
     ArticlesListView = require('../articles/articles.list.view'),
     ArticleCollection = require('../articles/article.collection'),
-    MessageCollection = require('../messages/message.collection');
+    MessageCollection = require('../messages/message.collection'),
+    AdminClient = require('../adminclient');
 
 var DashboardController = function() {
     this.messageCollection = new MessageCollection();
@@ -14,6 +15,8 @@ var DashboardController = function() {
         messageCollection: this.messageCollection
     });
 
+    AdminClient.breadCrumbs = [AdminClient.breadCrumbs[0]];
+
     this.view.render();
     this.messageCollection.fetch();
     this.articleCollection.fetch();
@@ -23,6 +26,11 @@ var DashboardController = function() {
             collection: this.messageCollection
         });
 
+        AdminClient.breadCrumbs[1] = {
+            name: 'Messages',
+            location: '/admin/messages'
+        };
+
         this.view.render();
         this.view.collection.fetch();
     };
@@ -31,6 +39,12 @@ var DashboardController = function() {
         this.view = new ArticlesListView({
             collection: this.articleCollection
         });
+
+
+        AdminClient.breadCrumbs[1] = {
+            name: 'Articles',
+            location: '/admin/articles'
+        };
 
         this.view.render();
         this.view.collection.fetch();

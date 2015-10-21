@@ -1,0 +1,9 @@
+<form>
+    {{#each this}}
+    <div class="fieldItem">
+        <label for="{{@key}}">{{@key}}</label>
+        <input type="text" value="{{this.value}}" id="{{@key}}" />
+    </div>
+    {{/each}}
+    <input type="submit" value="Save Settings" />
+</form>

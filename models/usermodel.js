@@ -5,6 +5,22 @@ var User = new Datastore({
     filename: 'data/users'
 });
 
+exports.any = function(callback) {
+    User.loadDatabase(function(err) {
+        if (err) {
+            return callback(err);
+        }
+
+        User.find({}, function(err, users) {
+            if (err) {
+                return callback(err);
+            }
+
+            callback(null, (users.length > 1));
+        });
+    });
+};
+
 exports.find = function(query, callback) {
     User.loadDatabase(function(err) {
         if (err) {
@@ -72,13 +88,14 @@ exports.checkPassword = function(user, password, callback) {
 
 exports.createNewUser = function(req, res, next) {
     User.loadDatabase(function(err) {
+        var tempAlias = req.body.username.substr(0, req.body.username.indexOf('@'));
         User.insert({
             username: req.body.username,
             password: req.body.hashedPassword,
             role: 0,
             profile: {
                 fullName: '',
-                alias: '',
+                alias: tempAlias,
                 publicEmail: '',
                 location: '',
                 avatarUrl: '',

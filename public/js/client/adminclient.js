@@ -5,6 +5,10 @@ Backbone.$ = window.$;
 
 var client = {
     init: function() {
+        this.breadCrumbs = [{
+            name: 'Dashboard',
+            location: '/admin/dashboard'
+        }];
         this.updateSubHeader = function(title, icon) {
             if (title) {
                 $('.subhead').html(title);

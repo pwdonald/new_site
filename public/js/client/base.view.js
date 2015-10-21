@@ -14,11 +14,6 @@ Handlebars.registerHelper('date', function(options) {
 });
 
 var BaseView = Backbone.View.extend({
-    breadCrumbs: [{
-        name: 'Dashboard',
-        location: '/admin/dashboard'
-    }],
-
     render: function() {
         if (this.collection) {
             _.each(this.collection.models, function(model) {
@@ -62,9 +57,9 @@ var BaseView = Backbone.View.extend({
     updateBreadCrumbs: function() {
         var breadCrumbsList = $('.breadcrumb');
 
-        if (this.breadCrumbs) {
+        if (AdminClient.breadCrumbs) {
             breadCrumbsList.empty();
-            _.each(this.breadCrumbs, function(crumb) {
+            _.each(AdminClient.breadCrumbs, function(crumb) {
                 var a = $('<a>').attr('href', crumb.location).html(crumb.name);
                 var li = $('<li>').append(a);
                 breadCrumbsList.append(li);

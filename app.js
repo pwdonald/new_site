@@ -20,6 +20,7 @@ var admin = require('./routes/admin');
 var message = require('./routes/api/message');
 var article = require('./routes/api/article');
 var profile = require('./routes/api/profile');
+var settings = require('./routes/api/settings');
 
 var app = express();
 
@@ -66,6 +67,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/api', message);
 app.use('/api', article);
+app.use('/api', settings);
 app.use('/admin', admin);
 app.use('/api/profile', profile);
 

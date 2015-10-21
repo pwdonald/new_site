@@ -2,8 +2,11 @@ var express = require('express'),
     router = express.Router(),
     User = require('../models/usermodel'),
     Article = require('../models/articlemodel'),
+    Settings = require('../models/settingsmodel'),
     marked = require('marked'),
     removeMarked = require('remove-markdown');
+
+var globalSettings;
 
 var alreadyLoggedIn = function(req, res, next) {
     if (req.user && req.isAuthenticated()) {
@@ -12,6 +15,17 @@ var alreadyLoggedIn = function(req, res, next) {
         next();
     }
 };
+
+router.use(function(req, res, next) {
+    Settings.load(function(err, settings) {
+       if (err) {
+           throw err;
+       }
+
+       globalSettings = settings;
+       next();
+    });
+});
 
 router.use(function(req, res, next) {
     res.locals.user = req.user;
@@ -34,6 +48,7 @@ router.use(function(req, res, next) {
 
 router.get('/login', alreadyLoggedIn, function(req, res) {
     res.render('login', {
+        asideHide: true,
         error: req.flash('error'),
         pageName: 'login',
         pageIcon: 'user'
@@ -47,8 +62,13 @@ router.get('/logout', function(req, res) {
     });
 });
 
-router.get('/register', alreadyLoggedIn, function(req, res) {
+router.get('/register', alreadyLoggedIn, function(req, res, next) {
+    if (!globalSettings.registration.value) {
+        return next(new Error('Registration is disabled!'));
+    }
+
     res.render('register', {
+        hideAside: true,
         pageName: 'register',
         pageIcon: 'user-plus',
         error: req.flash('error')
