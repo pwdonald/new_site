@@ -1,7 +1,9 @@
 var express = require('express'),
     router = express.Router(),
     User = require('../models/usermodel'),
-    Article = require('../models/articlemodel');
+    Article = require('../models/articlemodel'),
+    marked = require('marked'),
+    removeMarked = require('remove-markdown');
 
 var alreadyLoggedIn = function(req, res, next) {
     if (req.user && req.isAuthenticated()) {
@@ -73,6 +75,8 @@ router.get('/article/search/:term', function(req, res, next) {
 
         if (count > 0) {
             articles.forEach(function(article) {
+                article.intro = marked(article.content.substring(0, 400) + '...');
+                
                 User.findById(article.author._id, function(err, user) {
                     article.author.profile = user.profile;
 
@@ -87,7 +91,6 @@ router.get('/article/search/:term', function(req, res, next) {
                         });
                     }
                 });
-                article.intro = article.content.substring(0, 400) + '...';
             });
         } else {
             res.render('articleresults', {
@@ -127,6 +130,7 @@ router.get('/article/:year/:month/:day/:articleTitle', function(req, res, next) 
 
             articles[0].author.profile = authorUser.profile;
             articles[0].url = req.protocol + '://' + req.get('host') + req.originalUrl;
+            articles[0].content = marked(articles[0].content);
 
             res.render('article', {
                 article: articles[0],
@@ -167,7 +171,7 @@ router.get('/blog', function(req, res, next) {
                         });
                     }
                 });
-                article.intro = article.content.substring(0, 400) + '...';
+                article.intro = removeMarked(article.content.substring(0, 400) + '...');
             });
         } else {
             res.render('index', {
