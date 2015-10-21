@@ -33,7 +33,7 @@ module.exports = function() {
         var day = date.getDate();
         var year = date.getFullYear();
 
-        return month + '/' + day + '/' + year;
+        return year + '/' + month + '/' + day;
     });
 
     hbs.registerHelper('formatTitle', function(options) {
