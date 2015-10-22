@@ -1,8 +1,7 @@
 var Backbone = require('backbone');
 
 var SettingsModel = Backbone.Model.extend({
-    urlRoot: '/api/settings',
-    idAttribute: '_id'
+    urlRoot: '/api/settings'
 });
 
 module.exports = SettingsModel;
