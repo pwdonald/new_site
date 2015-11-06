@@ -18,7 +18,7 @@
         <p class="author">Author:</p>
         <a href="/profile/{{author.profile.alias}}" title="Contact {{author.profile.alias}}">
             {{#if author.profile.avatarUrl}}
-            <span class="author-pic" title="{{author.profile.alias}} Profile Pic" style="background-image: url('{{author.profile.avatarUrl}}');"></span>
+            <span class="author-pic" title="{{author.profile.alias}} Profile Pic" style="background-image: url('../../../{{author.profile.avatarUrl}}');"></span>
             {{else}}
             <i class="fa fa-user"></i>
             {{/if}}
