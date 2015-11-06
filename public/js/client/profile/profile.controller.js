@@ -8,7 +8,7 @@ var ProfileController = function() {
     this.Profile = Backbone.Model.extend({
         url: '/api/profile',
         defaults: {
-            firstName: '',
+            fullName: '',
             alias: '',
             publicEmail: '',
             location: '',

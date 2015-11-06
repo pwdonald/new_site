@@ -1,5 +1,6 @@
 var Datastore = require('nedb'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    fs = require('fs');
 
 var User = new Datastore({
     filename: 'data/users'
@@ -136,8 +137,23 @@ exports.getUserProfile = function(req, res, next) {
 };
 
 exports.updateUserProfile = function(req, res, next) {
-    if (req.body && req.body.alias) {
-        req.body.alias = req.body.alias.toLowerCase();
+    if (req.body) {
+        if (req.body.alias) {
+            req.body.alias = req.body.alias.toLowerCase();
+        }
+
+        if (req.body.avatarData) {
+            var avatarData = req.body.avatarData;
+
+            var buffer = new Buffer(avatarData.split(',')[1], 'base64');
+            try {
+                fs.writeFileSync('./public/uploads/' + req.user._id, buffer);
+            } catch (e) {
+                console.log(e);
+            }
+            req.body.avatarUrl = '../uploads/' + req.user._id;
+            req.body.avatarData = '';
+        }
     }
 
     User.loadDatabase(function(err) {

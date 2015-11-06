@@ -2,14 +2,14 @@
     <form>
         <h2>User Profile</h2>
         <div class="row">
-        <div class="col-sm-6">
-            <h3>Name</h3>
-            <input value="{{fullName}}" type="text" name="fullName" placeholder="Full Name" id="fullName" required autofocus/>
-        </div>
-        <div class="col-sm-6">
-            <h3>Alias</h3>
-            <input value="{{alias}}" type="text" name="alias" placeholder="Display Name" id="alias"/>
-        </div>
+            <div class="col-sm-6">
+                <h3>Name</h3>
+                <input value="{{fullName}}" type="text" name="fullName" placeholder="Full Name" id="fullName" required autofocus/>
+            </div>
+            <div class="col-sm-6">
+                <h3>Alias</h3>
+                <input value="{{alias}}" type="text" name="alias" placeholder="Display Name" id="alias"/>
+            </div>
         </div>
         <div>
             <h3>Public Email</h3>
@@ -19,9 +19,16 @@
             <h3>Location</h3>
             <input value="{{location}}" type="text" name="location" placeholder="location" id="location" />
         </div>
-        <div>
-            <h3>Avatar URL</h3>
-            <input value="{{avatarUrl}}" type="text" name="avatarUrl" placeholder="Avatar URL" id="avatarUrl" />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Avatar</h3>
+                <input type="file" name="avatar" id="avatar" />
+            </div>
+            <div class="col-sm-6">
+                <h3>Avatar Preview</h3>
+                <img src="../{{avatarUrl}}" id="avatarImage" style="height: 50%; width: 50%; border=1px solid black;" />
+            </div>
         </div>
         <div>
             <h3>Bio</h3>
